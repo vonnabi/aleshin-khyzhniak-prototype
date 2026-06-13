@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Адвокатське бюро «Альошин та Партнери» — Право без кордонів</title>
+<meta name="description" content="Юридичний захист українців за кордоном та в Україні без особистої присутності. Дистанційна юридична допомога.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<style>
+  :root{
+    /* серо-бархатная премиум-палитра */
+    --bg:#23202a;
+    --bg2:#2c2833;
+    --surface:rgba(255,255,255,.045);
+    --glass:rgba(40,36,48,.55);
+    --ink:#f2eef4;
+    --muted:#a79fb1;
+    --line:rgba(255,255,255,.10);
+    --gold1:#f0dcae;
+    --gold2:#cfa869;
+    --gold3:#a37d44;
+    --rose:#bba3b2;
+    --max:1200px;
+    --ease:cubic-bezier(.2,.6,.2,1);
+    --spring:cubic-bezier(.34,1.56,.64,1);
+    /* fluid typography */
+    --fs-h1:clamp(44px,7vw,104px);
+    --fs-h2:clamp(30px,4.6vw,58px);
+    --fs-lead:clamp(17px,1.5vw,21px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',-apple-system,sans-serif;font-weight:300;color:var(--ink);line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;background:#23202a;
+  }
+  body.cursor-custom{cursor:none}
+  @media(hover:none){body.cursor-custom{cursor:auto}}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:600;line-height:1.1;letter-spacing:.004em}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 30px;position:relative;z-index:3}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Playfair Display',serif}
+  .gold{background:linear-gradient(105deg,var(--gold1),var(--gold2) 52%,var(--gold3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)}
+
+  /* animated background canvas */
+  #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(1200px 760px at 80% -10%,rgba(207,168,105,.16),transparent 62%),
+      radial-gradient(900px 820px at -8% 28%,rgba(170,150,180,.10),transparent 58%),
+      radial-gradient(820px 900px at 112% 100%,rgba(207,168,105,.10),transparent 60%),
+      linear-gradient(160deg,#2b2733,#201d27 58%,#262230);
+  }
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.045;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+
+  /* scroll progress */
+  .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:90;background:linear-gradient(90deg,var(--gold1),var(--gold3))}
+
+  /* custom cursor */
+  .cur,.cur-dot{position:fixed;top:0;left:0;z-index:100;pointer-events:none;border-radius:50%;mix-blend-mode:screen}
+  .cur{width:38px;height:38px;border:1px solid rgba(207,168,105,.6);transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s,border-color .3s}
+  .cur-dot{width:5px;height:5px;background:var(--gold1);transform:translate(-50%,-50%)}
+  .cur.big{width:74px;height:74px;background:rgba(207,168,105,.10);border-color:transparent}
+  @media(hover:none){.cur,.cur-dot{display:none}}
+
+  /* reveal (hidden only when JS active) */
+  html.js .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  html.js .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+
+  /* HEADER */
+  header{position:fixed;top:0;left:0;right:0;z-index:60;transition:.4s;border-bottom:1px solid transparent}
+  header.scrolled{background:rgba(32,29,39,.7);backdrop-filter:blur(16px) saturate(150%);border-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand img{height:48px;width:auto;filter:drop-shadow(0 5px 12px rgba(0,0,0,.55)) drop-shadow(0 0 7px rgba(201,169,107,.16))}
+  .brand .bn{font-family:'Playfair Display',serif;font-size:16px;line-height:1.1;letter-spacing:.04em}
+  .brand .bn small{display:block;font-size:10px;letter-spacing:.24em;color:var(--muted);font-family:'Manrope',sans-serif;margin-top:2px}
+  .menu{display:flex;gap:34px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}
+  .menu a{position:relative;transition:color .25s}
+  .menu a:hover{color:var(--ink)}
+  .menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:linear-gradient(90deg,var(--gold1),var(--gold3));transition:width .3s}
+  .menu a:hover::after{width:100%}
+  .burger{display:none;font-size:24px;cursor:pointer;color:var(--gold1)}
+
+  .btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:12px;font-size:14px;letter-spacing:.03em;
+    color:#241b0e;font-weight:600;background:linear-gradient(105deg,var(--gold1),var(--gold2) 58%,var(--gold3));overflow:hidden;
+    box-shadow:0 14px 40px -14px rgba(207,168,105,.65);transition:transform .25s var(--spring),box-shadow .3s}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 22px 50px -12px rgba(207,168,105,.85)}
+  .btn::before{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .7s}
+  .btn:hover::before{left:160%}
+  .btn.ghost{background:transparent;color:var(--gold1);border:1px solid rgba(207,168,105,.45);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--gold1);background:rgba(207,168,105,.08)}
+  .btn.ghost::before{display:none}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px}
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center;width:100%}
+  .hero h1{font-size:var(--fs-h1);text-transform:uppercase}
+  .hero h1 .ln{display:block;overflow:hidden}
+  .hero h1 .ln span{display:inline-block;transition:transform 1s var(--ease)}
+  html.js .hero h1 .ln span{transform:translateY(110%)}
+  html.js .hero h1.in .ln span{transform:none}
+  .hero h1 .ln:nth-child(2) span{transition-delay:.12s}
+  .hero .lead{font-size:var(--fs-lead);color:var(--muted);max-width:46ch;margin:30px 0 38px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+  .scroll-ind{margin-top:64px;display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+  .scroll-ind .ln{width:48px;height:1px;background:var(--gold2);position:relative;overflow:hidden}
+  .scroll-ind .ln::after{content:"";position:absolute;inset:0;background:var(--gold1);animation:slide 2.2s var(--ease) infinite}
+  @keyframes slide{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+  .hero-photo{position:relative;perspective:1000px}
+  .hero-photo .frame{aspect-ratio:4/5;border-radius:22px;overflow:hidden;border:1px solid rgba(207,168,105,.3);
+    box-shadow:0 60px 110px -50px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.05);transition:transform .3s var(--ease)}
+  .hero-photo .frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(.12) contrast(1.04)}
+  .hero-photo .glass{position:absolute;left:-22px;bottom:30px;background:var(--glass);backdrop-filter:blur(14px) saturate(160%);
+    border:1px solid var(--line);border-radius:16px;padding:18px 22px;box-shadow:0 18px 40px -20px rgba(0,0,0,.6)}
+  .hero-photo .glass .nm{font-family:'Playfair Display',serif;font-size:19px}
+  .hero-photo .glass .rl{font-size:12px;color:var(--gold2);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+  .hero-photo .ring{position:absolute;top:-24px;right:-24px;width:120px;height:120px;border:1px solid rgba(207,168,105,.3);border-radius:50%;}
+  .hero-photo .ring::before{content:"";position:absolute;inset:8px;border:1px dashed rgba(207,168,105,.25);border-radius:50%;animation:spin 20s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* marquee */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(255,255,255,.02);position:relative;z-index:3}
+  .mtrack{display:flex;gap:56px;white-space:nowrap;animation:scroll 30s linear infinite;width:max-content}
+  .mtrack span{font-family:'Playfair Display',serif;font-style:italic;font-size:21px;color:var(--muted)}
+  .mtrack span::before{content:"✦";color:var(--gold2);margin-right:56px;font-style:normal}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  section{padding:130px 0;position:relative;z-index:3}
+  .sec-head{max-width:64ch;margin-bottom:60px}
+  .sec-head.center{margin:0 auto 60px;text-align:center}
+  .sec-head .eyebrow{margin-bottom:16px;display:block}
+  .sec-head h2{font-size:var(--fs-h2);text-transform:uppercase}
+  .sec-head p{color:var(--muted);margin-top:18px;font-size:17px}
+
+  /* glass card base */
+  .glassc{background:var(--glass);backdrop-filter:blur(12px) saturate(150%);border:1px solid var(--line);border-radius:18px}
+
+  /* SERVICES */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .scard{position:relative;height:320px;border-radius:18px;overflow:hidden;border:1px solid var(--line);display:flex;align-items:flex-end}
+  .scard .bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(.4) brightness(.55);transition:transform 1s var(--ease),filter .6s}
+  .scard:hover .bg{transform:scale(1.08);filter:grayscale(.05) brightness(.72)}
+  .scard::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 28%,rgba(24,21,30,.92))}
+  .scard .cap{position:relative;z-index:2;padding:28px 26px}
+  .scard .cap h3{font-size:21px;line-height:1.24}
+  .scard .cap .more{font-size:13px;color:var(--gold2);margin-top:10px;opacity:0;transform:translateY(8px);transition:.4s;letter-spacing:.05em}
+  .scard:hover .cap .more{opacity:1;transform:none}
+  .scard.txt{align-items:center;justify-content:center;text-align:center}
+  .scard.txt .bg{background:linear-gradient(150deg,rgba(255,255,255,.06),rgba(255,255,255,.01));filter:none}
+  .scard.txt .cap h3{font-size:23px}.scard.txt .cap p{color:var(--muted);font-size:14px;margin-top:10px}
+
+  /* ATTORNEY */
+  .att{display:grid;grid-template-columns:.9fr 1.1fr;gap:58px;align-items:center}
+  .att-photo{aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid rgba(207,168,105,.22);box-shadow:0 50px 90px -45px rgba(0,0,0,.75)}
+  .att-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.18)}
+  .att h2{font-size:var(--fs-h2);text-transform:uppercase;margin:14px 0 22px}
+  .att p{color:var(--muted);margin-bottom:16px;max-width:56ch}
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin-top:26px}
+  .check{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--ink);font-weight:400}
+  .check .ic{flex:0 0 24px;width:24px;height:24px;border-radius:50%;border:1px solid var(--gold2);display:flex;align-items:center;justify-content:center;color:var(--gold1);font-size:11px;margin-top:2px}
+
+  /* VALUES */
+  .values{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .vc{padding:28px 24px;transition:transform .4s var(--ease),border-color .4s}
+  .vc:hover{transform:translateY(-6px);border-color:rgba(207,168,105,.4)}
+  .vc .vn{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold2);font-size:15px;margin-bottom:10px}
+  .vc h4{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px}
+  .vc p{font-size:13.5px;color:var(--muted)}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  .stat .n{font-family:'Playfair Display',serif;font-size:clamp(40px,5.5vw,68px);font-weight:700;line-height:1}
+  .stat .l{font-size:14px;color:var(--muted);margin-top:10px}
+
+  /* SPECIALIZATION */
+  .spec{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .spec-col{padding:42px 36px}
+  .spec-col h3{font-size:25px;text-transform:uppercase;margin-bottom:22px}
+  .spec-col h3 .num{color:var(--gold2);font-style:italic;margin-right:12px}
+  .spec-col ul{list-style:none}
+  .spec-col li{padding:14px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:15px;display:flex;gap:12px;transition:color .3s,padding-left .3s}
+  .spec-col li:hover{color:var(--ink);padding-left:6px}
+  .spec-col li::before{content:"—";color:var(--gold2)}
+  .spec-col li:last-child{border-bottom:none}
+
+  /* CASES horizontal */
+  .cases-pin{overflow:hidden}
+  .ctrack{display:flex;gap:22px;padding:0 30px;width:max-content}
+  .ccard{width:380px;flex:0 0 380px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px)}
+  .ccard .ph{height:200px;background-size:cover;background-position:center;filter:grayscale(.3) brightness(.82)}
+  .ccard .bd{padding:26px}
+  .ccard .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);margin-bottom:12px}
+  .ccard h3{font-size:19px;line-height:1.3;margin-bottom:10px}
+  .ccard p{color:var(--muted);font-size:14px}
+  .cases-hint{text-align:center;color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-top:30px}
+
+  /* FAQ */
+  .faq{max-width:860px;margin:0 auto}
+  .qa{border-bottom:1px solid var(--line)}
+  .qa .q{padding:28px 0;display:flex;justify-content:space-between;gap:20px;cursor:pointer;font-family:'Playfair Display',serif;font-size:20px;align-items:center}
+  .qa .q .sign{color:var(--gold1);font-size:26px;transition:transform .3s;flex:0 0 auto}
+  .qa.open .q .sign{transform:rotate(45deg)}
+  .qa .a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease),padding .45s;color:var(--muted);font-size:15.5px}
+  .qa.open .a{max-height:280px;padding-bottom:28px}
+
+  /* CTA band */
+  .band{position:relative;overflow:hidden;border-radius:26px;padding:70px;text-align:center;border:1px solid rgba(207,168,105,.3);
+    background:linear-gradient(120deg,rgba(207,168,105,.16),rgba(170,150,180,.10))}
+  .band::before{content:"";position:absolute;top:-50%;left:-30%;width:60%;height:200%;background:linear-gradient(100deg,transparent,rgba(240,220,174,.12),transparent);transform:skewX(-18deg);animation:shimmer 6s ease-in-out infinite}
+  @keyframes shimmer{0%,100%{left:-40%}50%{left:120%}}
+  .band h2{font-size:clamp(28px,4vw,50px);text-transform:uppercase;margin-bottom:18px}
+  .band p{color:var(--muted);max-width:56ch;margin:0 auto 30px}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .cinfo .row{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .cinfo .k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);min-width:108px}
+  .cinfo .v{font-size:18px}
+  .cinfo .v a{transition:color .25s}.cinfo .v a:hover{color:var(--gold1)}
+  form{padding:36px}
+  .field{margin-bottom:18px}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;letter-spacing:.03em}
+  input,textarea{width:100%;padding:15px 17px;border:1px solid var(--line);border-radius:11px;font-family:inherit;font-size:15px;background:rgba(0,0,0,.2);color:var(--ink);transition:.25s}
+  input::placeholder,textarea::placeholder{color:#7a7286}
+  input:focus,textarea:focus{outline:none;border-color:var(--gold2);box-shadow:0 0 0 3px rgba(207,168,105,.14)}
+  textarea{resize:vertical;min-height:112px}
+  form .btn{width:100%;justify-content:center;border:none;cursor:pointer;font-size:15px}
+  .note{font-size:12px;color:#857c91;margin-top:10px}
+  .ok{display:none;color:var(--gold1);margin-top:12px;font-size:14px}
+
+  footer{padding:58px 0 40px;border-top:1px solid var(--line);margin-top:30px;position:relative;z-index:3}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+  .foot .muted{color:#857c91;font-size:13.5px}
+  .foot-links{display:flex;gap:24px;font-size:13.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+  @media(max-width:920px){
+    .hero-grid,.att,.spec,.contact-grid{grid-template-columns:1fr}
+    .hero-photo{order:-1;max-width:360px}
+    .grid,.values,.stats{grid-template-columns:1fr 1fr}
+    .checks{grid-template-columns:1fr}
+    .menu,.nav>.btn{display:none}.burger{display:block}
+    .band{padding:44px 26px}
+    section{padding:90px 0}
+  }
+  @media(max-width:560px){.grid,.values,.stats{grid-template-columns:1fr}.ccard{width:300px;flex-basis:300px}}
+
+  /* 2026 editorial direction */
+  :root{
+    --bg:#171619;
+    --bg2:#211f22;
+    --surface:rgba(255,251,244,.045);
+    --glass:rgba(30,28,30,.72);
+    --ink:#f3eee5;
+    --muted:#aaa29a;
+    --line:rgba(237,222,196,.15);
+    --gold1:#f0dfbb;
+    --gold2:#c9a96b;
+    --gold3:#8e6a34;
+    --max:1360px;
+    --fs-h1:clamp(68px,9.8vw,156px);
+    --fs-h2:clamp(46px,6.5vw,92px);
+  }
+  body{background:var(--bg);font-weight:400}
+  h1,h2,h3,.serif,.brand .bn,.stat .n,.vc h4,.qa .q{font-family:'Instrument Serif','Playfair Display',serif}
+  .wrap{padding:0 clamp(20px,4vw,64px)}
+  .veil{
+    background:
+      radial-gradient(900px 700px at 92% 8%,rgba(201,169,107,.16),transparent 62%),
+      radial-gradient(760px 760px at -10% 44%,rgba(164,151,143,.11),transparent 62%),
+      radial-gradient(620px 500px at 52% 62%,rgba(112,96,79,.08),transparent 70%),
+      linear-gradient(135deg,#171619 0%,#242124 48%,#151416 100%);
+  }
+  .grain{opacity:.105;mix-blend-mode:soft-light}
+  #bg-canvas{opacity:.65}
+  .gold{background:linear-gradient(105deg,#f7ecd4 8%,#d9bd82 48%,#9a7440 88%);-webkit-background-clip:text;background-clip:text}
+  .eyebrow{color:#d7b879;font-size:11px;font-weight:600;letter-spacing:.28em}
+  .eyebrow::before{content:"";display:inline-block;width:32px;height:1px;background:currentColor;vertical-align:middle;margin-right:13px}
+  .progress{height:3px;background:linear-gradient(90deg,#f0dfbb,#b98e4e)}
+
+  header{padding:12px 0}
+  header.scrolled{background:rgba(23,22,25,.78);border-color:rgba(237,222,196,.1);backdrop-filter:blur(24px)}
+  .nav{height:68px}
+  .brand img{height:48px}
+  .brand .bn{font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;letter-spacing:.11em}
+  .brand .bn small{font-size:8px;margin-top:5px;color:#8e8781}
+  .menu{gap:28px;font-size:10px;font-weight:600;letter-spacing:.14em}
+  .menu a::after{background:linear-gradient(90deg,#f0dfbb,#a77d42)}
+  .btn{
+    min-height:54px;padding:14px 25px;border-radius:0;color:#241d14;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    background:linear-gradient(110deg,#f0dfbb 0%,#cfad70 48%,#a27a42 100%);box-shadow:0 18px 50px -20px rgba(190,146,79,.75);
+  }
+  .btn:hover{box-shadow:0 24px 60px -18px rgba(201,169,107,.9);transform:translateY(-2px)}
+  .btn.ghost{color:#efe8dc;border-color:rgba(232,214,183,.3);background:rgba(255,250,240,.025)}
+  .btn.ghost:hover{background:rgba(201,169,107,.09);border-color:#d9bd82}
+
+  .hero{min-height:100svh;padding:142px 0 70px;overflow:hidden}
+  .hero::before{content:"A&P";position:absolute;right:-.05em;bottom:-.24em;font:italic 30vw/.8 'Instrument Serif',serif;color:rgba(255,255,255,.018);pointer-events:none}
+  .hero-grid{grid-template-columns:minmax(0,1.25fr) minmax(340px,.75fr);gap:clamp(28px,5vw,88px)}
+  .hero h1{font-weight:400;line-height:.76;letter-spacing:-.055em;text-transform:none;margin-left:-.06em}
+  .hero h1 .ln:nth-child(2){padding:0 0 .22em .72em;margin-bottom:-.12em}
+  .hero .lead{margin:42px 0 34px;font-size:clamp(16px,1.3vw,19px);line-height:1.7;max-width:53ch}
+  .hero-cta{gap:12px}
+  .hero-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:42px;max-width:600px}
+  .hero-meta div{border-top:1px solid var(--line);padding-top:12px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}
+  .hero-meta strong{display:block;color:var(--ink);font:28px/1 'Instrument Serif',serif;text-transform:none;letter-spacing:0;margin-bottom:6px}
+  .scroll-ind{margin-top:44px;font-size:9px}
+  .hero-photo{margin-top:15px}
+  .hero-photo .frame{aspect-ratio:3/4;border-radius:0;border:0;clip-path:polygon(0 7%,92% 0,100% 91%,8% 100%);box-shadow:none}
+  .hero-photo .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(185,142,78,.04),rgba(15,13,14,.5))}
+  .hero-photo .frame img{filter:saturate(.78) contrast(1.04);transform:scale(1.03);object-position:50% 38%}
+  .hero-photo .glass{left:-48px;bottom:46px;border-radius:0;border-left:2px solid #c9a96b;padding:18px 23px;background:rgba(25,23,24,.82)}
+  .hero-photo .glass .nm{font:25px/1.05 'Instrument Serif',serif}
+  .hero-photo .glass .rl{color:#d3b576;font-size:9px;margin-top:8px}
+  .hero-photo .ring{width:150px;height:150px;right:-42px;top:-32px;border-color:rgba(201,169,107,.38)}
+  .hero-photo .ring::before{border-color:rgba(201,169,107,.24)}
+
+  .marquee{padding:14px 0;background:#c9a96b;border:0;width:100%;margin-left:0}
+  .mtrack{gap:48px;animation-duration:36s}
+  .mtrack span{font:italic 20px/1 'Instrument Serif',serif;color:#28221b}
+  .mtrack span::before{content:"◆";font-size:9px;color:#725129;margin-right:48px}
+
+  section{padding:clamp(100px,11vw,170px) 0}
+  .sec-head{max-width:900px;margin-bottom:70px}
+  .sec-head.center{text-align:left;margin:0 auto 70px}
+  .sec-head h2{font-weight:400;line-height:.88;letter-spacing:-.04em;text-transform:none}
+  .sec-head p{max-width:55ch;font-size:16px;line-height:1.75}
+  .glassc{border-radius:0;background:rgba(255,255,255,.025);backdrop-filter:blur(14px)}
+
+  #services{background:linear-gradient(180deg,transparent,rgba(255,255,255,.018),transparent)}
+  .grid{grid-template-columns:repeat(12,1fr);gap:12px}
+  .scard{height:410px;border-radius:0;border-color:rgba(255,255,255,.12)}
+  .scard:nth-child(1),.scard:nth-child(4){grid-column:span 7}
+  .scard:nth-child(2),.scard:nth-child(3){grid-column:span 5}
+  .scard:nth-child(5),.scard:nth-child(6){grid-column:span 6;height:340px}
+  .scard .bg{filter:saturate(.72) brightness(.52) contrast(1.06)}
+  .scard:hover .bg{filter:saturate(.92) brightness(.67) contrast(1.04);transform:scale(1.045)}
+  .scard::after{background:linear-gradient(180deg,rgba(15,13,14,.08) 10%,rgba(15,13,14,.35) 45%,rgba(12,10,11,.96) 100%)}
+  .scard::before{position:absolute;z-index:3;top:24px;left:25px;color:#d8bd87;font:italic 15px 'Instrument Serif',serif}
+  .scard:nth-child(1)::before{content:"01"}.scard:nth-child(2)::before{content:"02"}.scard:nth-child(3)::before{content:"03"}
+  .scard:nth-child(4)::before{content:"04"}.scard:nth-child(5)::before{content:"05"}.scard:nth-child(6)::before{content:"06"}
+  .scard .cap{padding:32px;width:100%}
+  .scard .cap h3{font:34px/1.02 'Instrument Serif',serif;max-width:20ch}
+  .scard .cap p{max-width:54ch;margin-top:13px;color:rgba(243,238,229,.72);font-size:13px;line-height:1.55}
+  .scard .cap .more{display:inline-flex;align-items:center;gap:10px;color:#dbc18c;font-size:10px;text-transform:uppercase;letter-spacing:.14em;margin-top:18px;opacity:1;transform:none}
+  .scard .cap .more::before{content:"";width:24px;height:1px;background:currentColor;transition:width .35s var(--ease)}
+  .scard:hover .cap .more::before{width:42px}
+  .scard:nth-child(5) .cap h3,.scard:nth-child(6) .cap h3{font-size:38px}
+
+  .att{grid-template-columns:1.05fr .95fr;gap:clamp(44px,8vw,120px)}
+  .att-photo{aspect-ratio:4/5;border:0;border-radius:0;clip-path:polygon(0 0,100% 6%,94% 100%,8% 94%)}
+  .att-photo img{filter:saturate(.8) contrast(1.04);object-position:50% 58%;transform:scale(1.015)}
+  .att h2{font-weight:400;line-height:.9;letter-spacing:-.04em;text-transform:none;margin:20px 0 30px}
+  .att p{font-size:16px;line-height:1.85}
+  .checks{margin-top:38px;gap:0 26px}
+  .check{padding:16px 0;border-top:1px solid var(--line);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  .check .ic{border:0;color:#d2b474;font-size:15px}
+
+  .values{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .vc{border:0;border-right:1px solid var(--line);padding:38px 30px;min-height:220px}
+  .vc:last-child{border-right:0}
+  .vc:hover{transform:none;background:rgba(201,169,107,.075)}
+  .vc .vn{color:#cfad70;font-size:18px}
+  .vc h4{font-size:28px;font-weight:400}
+
+  .stats{text-align:left;gap:0;border-top:1px solid var(--line)}
+  .stat{padding:32px 26px;border-right:1px solid var(--line)}
+  .stat:first-child{padding-left:0}.stat:last-child{border:0}
+  .stat .n{font-weight:400;font-size:clamp(54px,7vw,100px);letter-spacing:-.04em}
+  .stat .l{max-width:15ch;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+
+  .spec{gap:1px;background:var(--line);border:1px solid var(--line)}
+  .spec-col{padding:52px;background:#1b191b}
+  .spec-col h3{font:42px/1 'Instrument Serif',serif;text-transform:none}
+  .spec-col h3 .num{font-size:16px;color:#d0af70}
+  .spec-col li{padding:18px 0;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+  .spec-col li::before{color:#c6a365}
+
+  .cases-pin{background:#b9b2aa;color:#211e1c}
+  .cases-pin .eyebrow,.ccard .tag{color:#80602f}
+  .cases-pin .sec-head p,.ccard p,.cases-hint{color:#665f59}
+  .ctrack{gap:12px}
+  .ccard{width:430px;flex-basis:430px;border-radius:0;border:1px solid rgba(45,37,29,.2);background:#ded9d1;backdrop-filter:none}
+  .ccard .ph{height:260px;filter:saturate(.72) brightness(.88) contrast(1.04);position:relative}
+  .ccard .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(33,30,28,.18))}
+  .ccard .bd{padding:30px}
+  .ccard h3{font:31px/1.05 'Instrument Serif',serif}
+
+  .faq{max-width:100%}
+  .qa .q{font-size:clamp(24px,3vw,42px);font-weight:400;padding:32px 0}
+  .qa .q .sign{color:#d0ae6d;font-family:'Manrope',sans-serif;font-weight:200}
+  .qa .a{max-width:65ch;font-size:16px;line-height:1.8}
+
+  .band{min-height:580px;padding:clamp(38px,7vw,90px);border-radius:0;border:0;text-align:left;display:flex;flex-direction:column;justify-content:flex-end;
+    background:linear-gradient(90deg,rgba(18,16,17,.97) 0%,rgba(22,19,19,.78) 48%,rgba(22,18,15,.12) 100%),url('assets/legal-architecture-gold.png') center/cover}
+  .band::before{display:none}
+  .band h2{font-weight:400;line-height:.9;letter-spacing:-.04em;text-transform:none;max-width:15ch}
+  .band p{margin:24px 0 30px;max-width:52ch}
+  .band .btn{align-self:flex-start}
+
+  .contact-grid{grid-template-columns:.9fr 1.1fr;gap:clamp(40px,9vw,120px)}
+  .cinfo .row{padding:27px 0}
+  .cinfo .k{color:#d0ad6c;font-size:10px}
+  .cinfo .v{font:26px/1.25 'Instrument Serif',serif}
+  form{padding:clamp(28px,4vw,54px);border-top:2px solid #c6a263}
+  label{font-size:10px;text-transform:uppercase;letter-spacing:.12em}
+  input,textarea{border-radius:0;background:transparent;border-width:0 0 1px;padding:14px 0}
+  input:focus,textarea:focus{box-shadow:none;border-color:#d6b97d}
+  footer{background:#111012}
+  .cur{border-color:rgba(215,184,121,.72)}
+  .cur-dot{background:#e4cc9b}
+  .cur.big{background:rgba(201,169,107,.17)}
+
+  @media(max-width:920px){
+    .hero-grid{grid-template-columns:1fr}.hero-photo{order:0;max-width:520px;margin:35px 0 0 auto}
+    .hero h1{font-size:clamp(64px,15vw,120px)}
+    .hero h1 .ln:nth-child(2){padding-left:.2em}
+    .grid{grid-template-columns:1fr 1fr}
+    .scard:nth-child(n){grid-column:span 1;height:410px}
+    .att{grid-template-columns:1fr}.spec,.contact-grid{grid-template-columns:1fr}
+    .menu{display:flex;position:fixed;inset:0 auto auto 0;width:100vw;height:100dvh;z-index:70;background:#171619;flex-direction:column;align-items:center;justify-content:center;gap:30px;font:40px/1 'Instrument Serif',serif;text-transform:none;transform:translateY(-105%);transition:transform .65s var(--ease)}
+    body.menu-open .menu{transform:none}
+    .burger{display:block;position:relative;z-index:80;width:44px;height:44px;font-size:0;border:1px solid var(--line);border-radius:0;background:transparent;color:inherit;appearance:none}
+    .burger::before,.burger::after{content:"";position:absolute;left:12px;right:12px;height:1px;background:#fff;top:17px;transition:.3s}
+    .burger::after{top:25px}
+    body.menu-open .burger::before{top:21px;transform:rotate(45deg)}
+    body.menu-open .burger::after{top:21px;transform:rotate(-45deg)}
+    .values,.stats{grid-template-columns:1fr 1fr}
+    body.cursor-custom{cursor:auto}.cur,.cur-dot{display:none}
+    .cases-pin{overflow:visible}
+    .ctrack{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:none}
+    .ctrack::-webkit-scrollbar{display:none}
+    .ccard{scroll-snap-align:start}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}.hero{padding-top:120px}
+    .marquee{width:100%;margin-left:0;transform:none}
+    .hero h1{font-size:clamp(58px,18vw,84px)}
+    .hero-meta{grid-template-columns:1fr 1fr}.hero-meta div:last-child{display:none}
+    .hero-photo .glass{left:0;bottom:18px}.hero-photo .ring{display:none}
+    .grid{grid-template-columns:1fr}.scard:nth-child(n){height:420px}
+    .values,.stats{grid-template-columns:1fr}
+    .vc,.stat{border-right:0;border-bottom:1px solid var(--line);padding-left:0}
+    .spec-col{padding:34px 24px}.spec-col h3{font-size:34px}
+    .ccard{width:82vw;flex-basis:82vw}
+    .band{min-height:620px;background:linear-gradient(180deg,rgba(20,17,17,.34),rgba(18,16,17,.98) 68%),url('assets/legal-architecture-gold.png') 65% center/cover}
+    .cinfo .row{display:block}.cinfo .k{margin-bottom:9px}
+  }
+
+  /* reduced motion */
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    .reveal{opacity:1!important;transform:none!important}
+    .hero h1 .ln span{transform:none!important}
+    body{cursor:auto}
+    .cur,.cur-dot{display:none}
+  }
+</style>
+</head>
+<body>
+<!-- CDN активів: https://res2.yourwebsite.life/res/698c721514677de1b1e6b4bd/ -->
+<canvas id="bg-canvas"></canvas>
+<div class="veil"></div>
+<div class="grain"></div>
+<div class="progress" id="progress"></div>
+<div class="cur" id="cur"></div>
+<div class="cur-dot" id="curDot"></div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="brand" data-cursor>
+      <img src="assets/brand/aleshin-mark.png" alt="" width="384" height="457">
+      <span class="bn">АЛЬОШИН ТА ПАРТНЕРИ<small>Адвокатське бюро</small></span>
+    </a>
+    <nav class="menu">
+      <a href="#services" data-cursor>Послуги</a>
+      <a href="#attorney" data-cursor>Адвокат</a>
+      <a href="#spec" data-cursor>Спеціалізація</a>
+      <a href="#cases" data-cursor>Кейси</a>
+      <a href="#faq" data-cursor>Питання</a>
+      <a href="#contact" data-cursor>Контакти</a>
+    </nav>
+    <a href="#contact" class="btn" data-cursor>Консультація</a>
+    <button class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false"></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal">Адвокатське бюро · Україна</div>
+      <h1 id="heroTitle" style="margin-top:24px"><span class="ln"><span>Право</span></span><span class="ln"><span class="gold">без кордонів</span></span></h1>
+      <p class="lead reveal d2">Юридичний захист українців за кордоном та в Україні — без їхньої особистої присутності. Дистанційна юридична допомога з роботою на результат.</p>
+      <div class="hero-cta reveal d3">
+        <a href="#contact" class="btn" data-cursor>Отримати консультацію ↗</a>
+        <a href="#services" class="btn ghost" data-cursor>Наші послуги</a>
+      </div>
+      <div class="hero-meta reveal d4">
+        <div><strong>50+</strong>виграних справ</div>
+        <div><strong>Online</strong>по всьому світу</div>
+        <div><strong>24/7</strong>зв'язок з клієнтом</div>
+      </div>
+      <div class="scroll-ind reveal d4"><span class="ln"></span>Гортайте вниз</div>
+    </div>
+    <div class="hero-photo reveal d2" id="heroPhoto">
+      <div class="ring"></div>
+      <div class="frame" id="heroFrame">
+        <img src="assets/portraits/vladyslav-editorial.jpg" alt="Владислав Альошин, адвокат" fetchpriority="high">
+      </div>
+      <div class="glass">
+        <div class="nm">Владислав Альошин</div>
+        <div class="rl">Адвокат · засновник бюро</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="mtrack">
+    <span>робота на результат</span><span>повне інформування клієнта</span><span>чіткі строки та етапи</span><span>онлайн відео-консультації</span>
+    <span>робота на результат</span><span>повне інформування клієнта</span><span>чіткі строки та етапи</span><span>онлайн відео-консультації</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Що ми робимо</span>
+      <h2>Юридичні послуги</h2>
+      <p>Повний супровід справ дистанційно — від першої консультації до рішення суду.</p>
+    </div>
+    <div class="grid">
+      <article class="scard reveal d1" data-cursor><div class="bg" style="background-image:url('assets/services/court-representation.jpg')"></div><div class="cap"><h3>Представництво в суді у кримінальних та цивільних справах</h3><p>Аналізуємо докази, формуємо позицію захисту та ведемо справу на кожному етапі судового процесу.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
+      <article class="scard reveal d2" data-cursor><div class="bg" style="background-image:url('assets/services/tcc-representation.jpg')"></div><div class="cap"><h3>Представництво інтересів в органах ТЦК та СП</h3><p>Перевіряємо законність рішень, готуємо звернення та представляємо клієнта без зайвих особистих візитів.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
+      <article class="scard reveal d3" data-cursor><div class="bg" style="background-image:url('assets/services/administrative-cases.jpg')"></div><div class="cap"><h3>Представництво в адміністративних справах</h3><p>Оскаржуємо рішення, дії або бездіяльність державних органів та відновлюємо порушені права.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
+      <article class="scard reveal d1" data-cursor><div class="bg" style="background-image:url('assets/services/business-support.jpg')"></div><div class="cap"><h3>Супровід бізнесу</h3><p>Договори, претензії, перевірки та спори — юридична підтримка для стабільної роботи компанії.</p><a class="more" href="#contact">Обговорити завдання →</a></div></article>
+      <article class="scard reveal d2" data-cursor><div class="bg" style="background-image:url('assets/services/divorce.jpg')"></div><div class="cap"><h3>Розірвання шлюбу</h3><p>Організовуємо розлучення, поділ майна та питання аліментів коректно й дистанційно.</p><a class="more" href="#contact">Обговорити ситуацію →</a></div></article>
+      <article class="scard reveal d3" data-cursor><div class="bg" style="background-image:url('assets/services/inheritance.jpg')"></div><div class="cap"><h3>Вступ у спадщину</h3><p>Відновлюємо строки, оформлюємо документи та супроводжуємо спадкову справу за довіреністю.</p><a class="more" href="#contact">Обговорити ситуацію →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ATTORNEY -->
+<section id="attorney">
+  <div class="wrap att">
+    <div class="att-photo reveal" data-parallax>
+      <img src="assets/portraits/vladyslav-editorial.jpg" alt="Владислав Альошин" loading="lazy">
+    </div>
+    <div class="reveal d1">
+      <span class="eyebrow">Хто захищає ваші інтереси</span>
+      <h2>Адвокат, який знає систему зсередини</h2>
+      <p>Професійний шлях Владислава Альошина поєднує досвід роботи в правоохоронних органах, адвокатську практику та реальне розуміння системи зсередини. Досвід роботи слідчим дозволяє не просто представляти інтереси клієнтів, а будувати стратегію з урахуванням усіх ризиків і процесуальних нюансів.</p>
+      <div class="checks">
+        <div class="check"><span class="ic">✓</span>практичний досвід роботи з доказами</div>
+        <div class="check"><span class="ic">✓</span>знання логіки дій слідства та прокуратури</div>
+        <div class="check"><span class="ic">✓</span>вміння передбачати кроки опонентів</div>
+        <div class="check"><span class="ic">✓</span>глибоке розуміння кримінального процесу</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Досвід, що формує підхід</span>
+      <h2>Учасник бойових дій</h2>
+      <p>Це не статус — це життєвий досвід, який впливає на підхід до захисту клієнтів.</p>
+    </div>
+    <div class="values">
+      <div class="vc glassc reveal d1"><div class="vn">01</div><h4>Повага до закону</h4><p>та держави як основа професійної етики.</p></div>
+      <div class="vc glassc reveal d2"><div class="vn">02</div><h4>Стійкість</h4><p>у складних та резонансних ситуаціях.</p></div>
+      <div class="vc glassc reveal d3"><div class="vn">03</div><h4>Дисципліна</h4><p>системна робота на кожному етапі справи.</p></div>
+      <div class="vc glassc reveal d4"><div class="vn">04</div><h4>Відповідальність</h4><p>високий рівень особистої відповідальності.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding:80px 0">
+  <div class="wrap stats">
+    <div class="stat reveal d1"><div class="n gold"><span data-count="50">0</span>+</div><div class="l">виграних справ у судах</div></div>
+    <div class="stat reveal d2"><div class="n gold"><span data-count="3">0</span>+</div><div class="l">роки адвокатської практики</div></div>
+    <div class="stat reveal d3"><div class="n gold"><span data-count="100">0</span>%</div><div class="l">дистанційна робота</div></div>
+    <div class="stat reveal d4"><div class="n gold">24/7</div><div class="l">на зв'язку з клієнтом</div></div>
+  </div>
+</section>
+
+<!-- SPECIALIZATION -->
+<section id="spec">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Напрямки практики</span>
+      <h2>Спеціалізація</h2>
+    </div>
+    <div class="spec">
+      <div class="spec-col glassc reveal d1">
+        <h3><span class="num serif">01</span>Цивільне право</h3>
+        <ul>
+          <li>представництво без особистої присутності клієнта</li>
+          <li>оскарження процесуальних рішень</li>
+          <li>захист прав та інтересів у судах</li>
+          <li>представництво потерпілих</li>
+          <li>спадкові справи</li>
+        </ul>
+      </div>
+      <div class="spec-col glassc reveal d2">
+        <h3><span class="num serif">02</span>Кримінальне право</h3>
+        <ul>
+          <li>захист у суді</li>
+          <li>майнові спори</li>
+          <li>захист на стадії досудового розслідування</li>
+          <li>системна робота з доказами та ризиками</li>
+          <li>захист у складних та резонансних справах</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES horizontal -->
+<section id="cases" class="cases-pin">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Результат, а не обіцянки</span>
+      <h2>Успішні кейси</h2>
+      <p>Без формального підходу, без хаотичних дій, без гучних обіцянок. Кожна справа контролюється, планується й аналізується.</p>
+    </div>
+  </div>
+  <div class="ctrack" id="ctrack">
+    <div class="ccard"><div class="ph" role="img" aria-label="Документи звільнено з-під арешту" style="background-image:url('assets/cases/documents-released.jpg')"></div><div class="bd"><div class="tag">Кримінальна справа</div><h3>Арешт документів скасовано</h3><p>Військово-облікові документи повернуто клієнту через переконливу позицію захисту.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Кошти повернено власнику" style="background-image:url('assets/cases/assets-released.jpg')"></div><div class="bd"><div class="tag">Захист активів</div><h3>Арешт коштів знято</h3><p>Скасування арешту з вилучених 150 000 USD під час обшуку.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Автомобіль повернено власнику" style="background-image:url('assets/cases/car-released.jpg')"></div><div class="bd"><div class="tag">Майновий спір</div><h3>Арешт автомобіля скасовано</h3><p>Транспортний засіб повернуто клієнту в судовому порядку.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Незаконний військовий облік скасовано" style="background-image:url('assets/cases/registry-corrected.jpg')"></div><div class="bd"><div class="tag">Спір з ТЦК</div><h3>Захист від незаконної постановки на облік</h3><p>Успішна справа проти ТЦК — права клієнта відновлено.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Пенсійні виплати стягнуто на користь родини" style="background-image:url('assets/cases/pension-recovered.jpg')"></div><div class="bd"><div class="tag">Соціальний захист</div><h3>Перемога над бездіяльністю ПФУ</h3><p>Пенсію стягнуто через суд на користь родини клієнта.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Працівника поновлено на посаді" style="background-image:url('assets/cases/work-reinstated.jpg')"></div><div class="bd"><div class="tag">Трудовий спір</div><h3>Закон на боці працівника</h3><p>Поновлення на посаді та скасування виконавчого напису нотаріуса.</p></div></div>
+  </div>
+  <div class="cases-hint">← гортайте, щоб переглянути кейси →</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Поширені питання</span>
+      <h2>Питання та відповіді</h2>
+    </div>
+    <div class="faq">
+      <div class="qa reveal d1"><div class="q" data-cursor>Чи можна отримати юридичну допомогу без особистої присутності? <span class="sign">+</span></div><div class="a">Так. Співпраця з адвокатським бюро «Альошин та Партнери» проходить дистанційно та не потребує особистої участі клієнта. Усі консультації, погодження та супровід здійснюються онлайн або телефоном.</div></div>
+      <div class="qa reveal d2"><div class="q" data-cursor>Чи працюєте ви з клієнтами, які перебувають за кордоном? <span class="sign">+</span></div><div class="a">Так. Бюро спеціалізується на юридичному захисті українців як за кордоном, так і в Україні, без необхідності їхнього приїзду.</div></div>
+      <div class="qa reveal d3"><div class="q" data-cursor>Як відбувається комунікація під час співпраці? <span class="sign">+</span></div><div class="a">Комунікація здійснюється через онлайн відео- та телефонні консультації. Ви завжди в курсі етапів і строків виконання справи.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section style="padding-top:30px">
+  <div class="wrap">
+    <div class="band reveal">
+      <h2>Потрібен юридичний захист<br>без вашої присутності?</h2>
+      <p>Опишіть вашу ситуацію — ми відповімо та запропонуємо стратегію. Адвокат, який знає систему зсередини, завжди на крок попереду.</p>
+      <a href="#contact" class="btn" data-cursor>Отримати консультацію ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Зв'язатися з нами</span>
+      <h2>Контакти</h2>
+      <p>Дистанційна юридична допомога без кордонів.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo reveal d1">
+        <div class="row"><div class="k">Телефон</div><div class="v"><a href="tel:+380994000303" data-cursor>+38 (099) 400 03 03</a></div></div>
+        <div class="row"><div class="k">Email</div><div class="v"><a href="mailto:aleshin.partners@ukr.net" data-cursor>aleshin.partners@ukr.net</a></div></div>
+        <div class="row"><div class="k">Формат</div><div class="v">Повністю дистанційно — по всій Україні та за кордоном</div></div>
+        <div class="row"><div class="k">Графік</div><div class="v">Онлайн відео- та телефонні консультації</div></div>
+      </div>
+      <form class="glassc reveal d2" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';">
+        <div class="field"><label>Ваше ім'я</label><input type="text" placeholder="Іван Петренко" required></div>
+        <div class="field"><label>Телефон або Telegram</label><input type="text" placeholder="+38 099 000 00 00" required></div>
+        <div class="field"><label>Коротко про справу</label><textarea placeholder="Опишіть ситуацію кількома реченнями..."></textarea></div>
+        <button type="submit" class="btn" data-cursor>Надіслати запит ↗</button>
+        <div class="note">Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.</div>
+        <div class="ok">✓ Дякуємо! Ми зв'яжемося з вами найближчим часом.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="brand">
+      <img src="assets/brand/aleshin-mark.png" alt="" width="384" height="457">
+      <span class="bn">АЛЬОШИН ТА ПАРТНЕРИ<small>Адвокатське бюро</small></span>
+    </div>
+    <div class="foot-links"><a href="#services" data-cursor>Послуги</a><a href="#cases" data-cursor>Кейси</a><a href="#contact" data-cursor>Контакти</a></div>
+    <div class="muted">© 2026 АБ «Альошин та Партнери». Право без кордонів.</div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* safety net: ensure all content becomes visible even if something fails */
+addEventListener('load',()=>setTimeout(()=>{
+  document.querySelectorAll('.reveal:not(.in)').forEach(e=>e.classList.add('in'));
+  const ht=document.getElementById('heroTitle');if(ht)ht.classList.add('in');
+},2600));
+
+/* ---- animated gold-dust background ---- */
+(function(){
+  const c=document.getElementById('bg-canvas'),x=c.getContext('2d');let w,h,parts=[];
+  function size(){w=c.width=innerWidth;h=c.height=innerHeight;}
+  size();addEventListener('resize',size);
+  const N=reduce?0:Math.min(70,Math.floor(innerWidth/22));
+  for(let i=0;i<N;i++)parts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.8+.3,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,a:Math.random()*.5+.1});
+  function loop(){
+    x.clearRect(0,0,w,h);
+    for(const p of parts){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      x.beginPath();x.arc(p.x,p.y,p.r,0,6.28);x.fillStyle='rgba(207,168,105,'+p.a+')';x.fill();}
+    requestAnimationFrame(loop);
+  }
+  if(N)loop();
+})();
+
+/* ---- custom cursor ---- */
+(function(){
+  if(matchMedia('(hover:none)').matches||reduce)return;
+  document.body.classList.add('cursor-custom');
+  const cur=document.getElementById('cur'),dot=document.getElementById('curDot');
+  let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+  function ring(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(ring);}ring();
+  document.querySelectorAll('[data-cursor]').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'));});
+})();
+
+/* ---- header + progress + float cta ---- */
+const hdr=document.getElementById('hdr'),pr=document.getElementById('progress');
+addEventListener('scroll',()=>{
+  hdr.classList.toggle('scrolled',scrollY>30);
+  const sc=document.documentElement.scrollHeight-innerHeight;pr.style.width=(scrollY/sc*100)+'%';
+});
+
+/* ---- reveal via IntersectionObserver ---- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---- hero title line-reveal ---- */
+addEventListener('load',()=>setTimeout(()=>document.getElementById('heroTitle').classList.add('in'),200));
+
+/* ---- count up ---- */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;const el=e.target,end=+el.dataset.count;cio.unobserve(el);
+  if(reduce){el.textContent=end;return;}
+  let cur=0;const step=end/50;const t=setInterval(()=>{cur+=step;if(cur>=end){el.textContent=end;clearInterval(t);}else el.textContent=Math.floor(cur);},26);
+}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* ---- FAQ ---- */
+document.querySelectorAll('.qa .q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
+
+/* ---- mobile navigation ---- */
+const burger=document.querySelector('.burger');
+if(burger){
+  burger.addEventListener('click',()=>{
+    const open=document.body.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded',String(open));
+    burger.setAttribute('aria-label',open?'Закрити меню':'Відкрити меню');
+  });
+  document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>{
+    document.body.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded','false');
+  }));
+}
+
+/* ---- hero photo tilt ---- */
+(function(){
+  if(reduce)return;const ph=document.getElementById('heroPhoto'),fr=document.getElementById('heroFrame');if(!ph)return;
+  ph.addEventListener('mousemove',e=>{const r=ph.getBoundingClientRect();const rx=((e.clientY-r.top)/r.height-.5)*-8;const ry=((e.clientX-r.left)/r.width-.5)*8;fr.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;});
+  ph.addEventListener('mouseleave',()=>fr.style.transform='');
+})();
+
+/* ---- GSAP: horizontal cases + parallax ---- */
+addEventListener('load',()=>{
+  if(reduce||!window.gsap||!window.ScrollTrigger)return;
+  gsap.registerPlugin(ScrollTrigger);
+  const track=document.getElementById('ctrack');
+  if(track&&innerWidth>920){
+    const dist=()=>track.scrollWidth-innerWidth+60;
+    gsap.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#cases',start:'top top',end:()=>'+='+dist(),pin:true,scrub:1,invalidateOnRefresh:true}});
+  }
+  gsap.utils.toArray('[data-parallax]').forEach(el=>{
+    gsap.fromTo(el,{y:40},{y:-40,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}});
+  });
+});
+</script>
+</body>
+</html>
