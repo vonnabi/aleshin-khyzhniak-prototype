@@ -152,12 +152,10 @@
   .hero-photo .ring::before{content:"";position:absolute;inset:8px;border:1px dashed rgba(207,168,105,.25);border-radius:50%;animation:spin 20s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* marquee */
-  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(255,255,255,.02);position:relative;z-index:3}
-  .mtrack{display:flex;gap:56px;white-space:nowrap;animation:scroll 30s linear infinite;width:max-content}
-  .mtrack span{font-family:'Playfair Display',serif;font-style:italic;font-size:21px;color:var(--muted)}
-  .mtrack span::before{content:"✦";color:var(--gold2);margin-right:56px;font-style:normal}
-  @keyframes scroll{to{transform:translateX(-50%)}}
+  .hero-divider{position:relative;z-index:3}
+  .hero-divider .wrap{display:flex;align-items:center;gap:18px}
+  .hero-divider .line{height:1px;flex:1;background:linear-gradient(90deg,rgba(201,169,107,.45),rgba(237,222,196,.08))}
+  .hero-divider span{color:#9d9287;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
 
   section{padding:130px 0;position:relative;z-index:3}
   .sec-head{max-width:64ch;margin-bottom:60px}
@@ -349,11 +347,6 @@
   .hero-photo .ring{width:150px;height:150px;right:-42px;top:-32px;border-color:rgba(201,169,107,.38)}
   .hero-photo .ring::before{border-color:rgba(201,169,107,.24)}
 
-  .marquee{padding:14px 0;background:#c9a96b;border:0;width:100%;margin-left:0}
-  .mtrack{gap:48px;animation-duration:36s}
-  .mtrack span{font:italic 20px/1 'Instrument Serif',serif;color:#28221b}
-  .mtrack span::before{content:"◆";font-size:9px;color:#725129;margin-right:48px}
-
   section{padding:clamp(100px,11vw,170px) 0}
   .sec-head{max-width:900px;margin-bottom:70px}
   .sec-head.center{text-align:left;margin:0 auto 70px}
@@ -526,7 +519,7 @@
     .security-field .medium{opacity:.15}
     .security-field .bright{opacity:.23}
     .wrap{padding:0 20px}.hero{padding-top:120px}
-    .marquee{width:100%;margin-left:0;transform:none}
+    .hero-divider span{font-size:8px;letter-spacing:.14em}
     .hero h1{font-size:clamp(58px,18vw,84px)}
     .hero-meta{grid-template-columns:1fr 1fr}.hero-meta div:last-child{display:none}
     .hero-photo .glass{left:0;bottom:18px}.hero-photo .ring{display:none}
@@ -710,11 +703,10 @@
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="mtrack">
-    <span>робота на результат</span><span>повне інформування клієнта</span><span>чіткі строки та етапи</span><span>онлайн відео-консультації</span>
-    <span>робота на результат</span><span>повне інформування клієнта</span><span>чіткі строки та етапи</span><span>онлайн відео-консультації</span>
+<div class="hero-divider" aria-hidden="true">
+  <div class="wrap">
+    <div class="line"></div>
+    <span>Юридична допомога без кордонів</span>
   </div>
 </div>
 
