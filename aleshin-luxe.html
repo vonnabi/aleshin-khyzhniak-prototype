@@ -527,17 +527,15 @@
       transition:opacity .55s var(--ease),transform .55s var(--ease),filter .3s;
     }
     .menu a.menu-consult::before{content:"";position:absolute;inset:0;transform:translateX(-120%);background:linear-gradient(100deg,transparent,rgba(255,255,255,.42),transparent);animation:menu-shine 3.8s 1.4s ease-in-out infinite}
-    .menu a.menu-consult::after{
-      content:"";position:relative;left:auto;bottom:auto;z-index:1;display:block;flex:0 0 46px;width:46px;height:46px;color:#241d14;
+    .menu a.menu-consult::after{display:none}
+    .menu-consult-arrow{
+      position:relative;z-index:1;display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;
       border:1px solid rgba(36,29,20,.38);
-      background:
-        linear-gradient(currentColor,currentColor) calc(50% + 5px) calc(50% - 5px)/8px 1px no-repeat,
-        linear-gradient(currentColor,currentColor) calc(50% + 9px) calc(50% - 1px)/1px 8px no-repeat,
-        linear-gradient(135deg,transparent 48%,currentColor 49% 51%,transparent 52%) center/17px 17px no-repeat;
       transition:transform .4s var(--ease),background-color .3s,border-color .3s;
     }
+    .menu-consult-arrow svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:square;stroke-linejoin:miter}
     .menu-consult:active{filter:brightness(1.06)}
-    .menu a.menu-consult:active::after{transform:scale(.9) translate(2px,-2px);background-color:rgba(255,255,255,.18);border-color:rgba(36,29,20,.58)}
+    .menu-consult:active .menu-consult-arrow{transform:scale(.9) translate(2px,-2px);background-color:rgba(255,255,255,.18);border-color:rgba(36,29,20,.58)}
     body.menu-open .menu-consult{opacity:1;transform:none;transition-delay:.45s}
     @keyframes menu-shine{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
     @keyframes menu-arrow-touch{0%,68%,100%{transform:none}78%{transform:translate(3px,-3px)}88%{transform:none}}
@@ -545,7 +543,7 @@
     @media(hover:hover){
       .menu-main a:hover::after,.menu-main a:focus-visible::after{color:#d8b474;opacity:1;transform:translate(3px,-3px)}
       .menu-consult:hover,.menu-consult:focus-visible{filter:brightness(1.06)}
-      .menu a.menu-consult:hover::after,.menu a.menu-consult:focus-visible::after{
+      .menu-consult:hover .menu-consult-arrow,.menu-consult:focus-visible .menu-consult-arrow{
         transform:translate(3px,-3px);background-color:rgba(255,255,255,.16);border-color:rgba(36,29,20,.58);
       }
     }
@@ -556,9 +554,9 @@
       body.menu-open .menu-main a:nth-child(4)::after{animation-delay:.36s}
       body.menu-open .menu-main a:nth-child(5)::after{animation-delay:.48s}
       body.menu-open .menu-main a:nth-child(6)::after{animation-delay:.6s}
-      body.menu-open .menu-consult::after{animation:consult-arrow-touch 2.8s 1s ease-in-out infinite}
+      body.menu-open .menu-consult-arrow{animation:consult-arrow-touch 2.8s 1s ease-in-out infinite}
       body.menu-open .menu-main a:active::after,
-      body.menu-open .menu a.menu-consult:active::after{animation:none}
+      body.menu-open .menu-consult:active .menu-consult-arrow{animation:none}
     }
     .menu-meta{
       display:grid;position:relative;z-index:2;grid-template-columns:1fr auto;align-items:end;gap:16px;
@@ -732,7 +730,12 @@
         <a href="#faq" data-index="05" data-cursor>Питання</a>
         <a href="#contact" data-index="06" data-cursor>Контакти</a>
       </div>
-      <a class="menu-consult" href="#contact">Отримати консультацію</a>
+      <a class="menu-consult" href="#contact">
+        Отримати консультацію
+        <span class="menu-consult-arrow" aria-hidden="true">
+          <svg viewBox="0 0 18 18"><path d="M3.5 14.5 14.5 3.5M7 3.5h7.5V11"/></svg>
+        </span>
+      </a>
       <div class="menu-meta">
         <div><small>Зв'язатися</small><a href="tel:+380994000303">+38 (099) 400 03 03</a></div>
         <div class="online">Онлайн<br>по всьому світу</div>
