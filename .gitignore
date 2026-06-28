@@ -4,3 +4,14 @@ AGENTS.md
 фото/
 assets/asset-urls.txt
 assets/legal-architecture.png
+
+# Python / Django
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+staticfiles/
+
+# Build artifact (regenerate from source any time)
+aleshin-partners-site.zip
