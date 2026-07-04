@@ -67,7 +67,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Віддаємо assets/ за тим самим шляхом /assets/..., що й у HTML,
 # тому правити верстку не треба.
 STATIC_URL = "/assets/"
-STATICFILES_DIRS = [BASE_DIR / "assets"]
+STATICFILES_DIRS = [
+    BASE_DIR / "assets",
+    ("new-site", BASE_DIR / "new-site"),
+]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {
     "staticfiles": {
