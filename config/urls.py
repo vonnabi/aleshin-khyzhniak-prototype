@@ -1,24 +1,39 @@
 """URL-маршрути промосайту.
 
 Сайт статичний, тож усі сторінки — це TemplateView.
-Шляхи збігаються з відносними посиланнями у HTML
-(`aleshin-luxe.html`, `privacy.html`), тому верстку правити не довелося.
+Два сайти лежать у власних теках, картинки — спільні в `assets/`:
+  old-site/  → попередня версія (aleshin-luxe.html, privacy.html)
+  new-site/  → новий корпоративний сайт (aleshin-corporate.html)
 """
 
 from django.urls import path
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    # Головна
-    path("", TemplateView.as_view(template_name="aleshin-luxe.html"), name="home"),
+    # --- Старий сайт (головна) --------------------------------------
+    path(
+        "",
+        TemplateView.as_view(template_name="old-site/aleshin-luxe.html"),
+        name="home",
+    ),
     path(
         "aleshin-luxe.html",
-        TemplateView.as_view(template_name="aleshin-luxe.html"),
+        TemplateView.as_view(template_name="old-site/aleshin-luxe.html"),
     ),
-    # Політика конфіденційності
+    # --- Новий корпоративний сайт -----------------------------------
+    path(
+        "corporate",
+        TemplateView.as_view(template_name="new-site/aleshin-corporate.html"),
+        name="corporate",
+    ),
+    path(
+        "corporate.html",
+        TemplateView.as_view(template_name="new-site/aleshin-corporate.html"),
+    ),
+    # --- Спільні сторінки -------------------------------------------
     path(
         "privacy.html",
-        TemplateView.as_view(template_name="privacy.html"),
+        TemplateView.as_view(template_name="old-site/privacy.html"),
         name="privacy",
     ),
     # SEO-файли

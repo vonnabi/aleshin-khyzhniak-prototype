@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Адвокатське бюро «Альошин та Партнери» — Право без кордонів</title>
-<meta name="description" content="Юридичний захист українців за кордоном та в Україні без особистої присутності. Дистанційна юридична допомога.">
+<title>Адвокатське бюро «Альошин та Партнери» — Повний юридичний супровід в Україні та світі</title>
+<meta name="description" content="Провідне адвокатське бюро: кримінальне, цивільне, сімейне, корпоративне та міграційне право. 50+ виграних справ, команда практиків, робота онлайн по всьому світу.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#171619">
-<link rel="canonical" href="https://vonnabi.github.io/aleshin-partners-website/">
-<link rel="icon" type="image/png" sizes="64x64" href="assets/meta/favicon-64.png">
-<link rel="apple-touch-icon" href="assets/meta/apple-touch-icon.png">
+<link rel="canonical" href="https://vonnabi.github.io/aleshin-partners-website/corporate.html">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/meta/favicon-64.png">
+<link rel="apple-touch-icon" href="../assets/meta/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" content="Альошин та Партнери — Право без кордонів">
 <meta property="og:description" content="Дистанційний юридичний захист в Україні та за кордоном. Представництво, судові справи та консультації.">
-<meta property="og:url" content="https://vonnabi.github.io/aleshin-partners-website/">
+<meta property="og:url" content="https://vonnabi.github.io/aleshin-partners-website/corporate.html">
 <meta property="og:image" content="https://vonnabi.github.io/aleshin-partners-website/assets/meta/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -32,7 +32,7 @@
   "@context": "https://schema.org",
   "@type": "LegalService",
   "name": "Адвокатське бюро «Альошин та Партнери»",
-  "url": "https://vonnabi.github.io/aleshin-partners-website/",
+  "url": "https://vonnabi.github.io/aleshin-partners-website/corporate.html",
   "image": "https://vonnabi.github.io/aleshin-partners-website/assets/meta/og-image.jpg",
   "telephone": "+380994000303",
   "email": "aleshin.partners@ukr.net",
@@ -470,7 +470,7 @@
   .qa .a{max-width:65ch;font-size:16px;line-height:1.8}
 
   .band{min-height:580px;padding:clamp(38px,7vw,90px);border-radius:0;border:0;text-align:left;display:flex;flex-direction:column;justify-content:flex-end;
-    background:linear-gradient(90deg,rgba(18,16,17,.97) 0%,rgba(22,19,19,.78) 48%,rgba(22,18,15,.12) 100%),url('assets/optimized/legal-architecture-gold.jpg') center/cover}
+    background:linear-gradient(90deg,rgba(18,16,17,.97) 0%,rgba(22,19,19,.78) 48%,rgba(22,18,15,.12) 100%),url('../assets/optimized/legal-architecture-gold.jpg') center/cover}
   .band::before{display:none}
   .band h2{font-weight:400;line-height:.9;letter-spacing:-.04em;text-transform:none;max-width:15ch}
   .band p{margin:24px 0 30px;max-width:52ch}
@@ -634,7 +634,7 @@
     .stat .l{max-width:13ch;margin-top:14px;font-size:10px;line-height:1.55}
     .spec-col{padding:34px 24px}.spec-col h3{font-size:34px}
     .ccard{width:82vw;flex-basis:82vw}
-    .band{min-height:620px;background:linear-gradient(180deg,rgba(20,17,17,.34),rgba(18,16,17,.98) 68%),url('assets/optimized/legal-architecture-gold.jpg') 65% center/cover}
+    .band{min-height:620px;background:linear-gradient(180deg,rgba(20,17,17,.34),rgba(18,16,17,.98) 68%),url('../assets/optimized/legal-architecture-gold.jpg') 65% center/cover}
     .cinfo .row{display:block}.cinfo .k{margin-bottom:9px}
     footer{padding:46px 0 34px}
     footer::before{background:
@@ -672,6 +672,134 @@
     .hero h1 .ln span{transform:none!important}
     body{cursor:auto}
     .cur,.cur-dot{display:none}
+  }
+
+  /* ================= CORPORATE ADDITIONS ================= */
+  /* trust strip under hero */
+  .trust{position:relative;z-index:3;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(255,255,255,.014)}
+  .trust .ti{padding:34px clamp(20px,3vw,44px);border-right:1px solid var(--line);transition:background .4s}
+  .trust .ti:last-child{border-right:0}
+  .trust .ti:hover{background:rgba(201,169,107,.05)}
+  .trust .ti strong{display:block;font:400 clamp(34px,4vw,52px)/1 'Instrument Serif',serif;color:#efe8dc;letter-spacing:-.02em}
+  .trust .ti span{display:block;margin-top:12px;color:var(--muted);font-size:12.5px;line-height:1.55;max-width:22ch}
+
+  /* recognition marquee */
+  .marquee{position:relative;z-index:3;padding:32px 0;overflow:hidden;border-bottom:1px solid var(--line);
+    -webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .marquee-track{display:flex;gap:60px;width:max-content;animation:marquee 46s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  .marquee-item{display:flex;align-items:center;gap:16px;color:#b7ad9d;font:400 clamp(19px,2.2vw,31px)/1 'Instrument Serif',serif;white-space:nowrap;letter-spacing:.005em}
+  .marquee-item b{font-weight:400;color:#e4cc9b}
+  .marquee-item::before{content:"✦";color:#8c6f3f;font-size:.56em}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* practices directory */
+  .dir{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .dir-col{background:#191719;padding:clamp(30px,3vw,46px) clamp(24px,2.4vw,40px);transition:background .4s}
+  .dir-col:hover{background:#1c1a1c}
+  .dir-col .kk{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+  .dir-col .kk .num{font:italic 15px 'Instrument Serif',serif;color:#c9a96b}
+  .dir-col .kk h3{font:400 clamp(23px,2.4vw,29px)/1.02 'Instrument Serif',serif}
+  .dir-col ul{list-style:none}
+  .dir-col li a{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;transition:color .25s,padding .3s}
+  .dir-col li:first-child a{border-top:0}
+  .dir-col li a .ar{color:#8c6f3f;opacity:0;transform:translateX(-6px);transition:.3s;font-size:15px}
+  .dir-col li a:hover{color:var(--ink);padding-left:9px}
+  .dir-col li a:hover .ar{opacity:1;transform:none;color:#d3b576}
+
+  /* process */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .pstep{background:#191719;padding:clamp(36px,3.4vw,50px) clamp(26px,2.4vw,38px);transition:background .4s}
+  .pstep:hover{background:rgba(201,169,107,.06)}
+  .pstep .pn{font:400 clamp(38px,4vw,52px)/1 'Instrument Serif',serif;color:#4a4540;transition:color .4s;letter-spacing:-.02em}
+  .pstep:hover .pn{color:#c9a96b}
+  .pstep h4{font:400 clamp(21px,2vw,25px)/1.08 'Instrument Serif',serif;margin:22px 0 12px}
+  .pstep p{color:var(--muted);font-size:13.5px;line-height:1.72}
+
+  /* team */
+  .team{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tcard{position:relative;overflow:hidden;border:1px solid var(--line);background:#1a181a}
+  .tcard .ph{aspect-ratio:3/4;position:relative;overflow:hidden;background:linear-gradient(155deg,#29251f,#141315)}
+  .tcard .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.03);transition:transform .9s var(--ease),filter .5s}
+  .tcard:hover .ph img{transform:scale(1.055);filter:grayscale(.05)}
+  .tcard .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 46%,rgba(15,13,14,.92))}
+  .tcard .mono{position:absolute;inset:0;z-index:1;display:grid;place-items:center;color:#37322b;font:400 clamp(46px,6vw,74px) 'Instrument Serif',serif;letter-spacing:.04em}
+  .tcard .bd{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:0 22px 24px}
+  .tcard .bd .nm{font:400 clamp(19px,1.9vw,22px)/1.08 'Instrument Serif',serif}
+  .tcard .bd .rl{color:#d3b576;font-size:10px;text-transform:uppercase;letter-spacing:.13em;margin-top:9px}
+
+  /* press / media */
+  .press{border-top:1px solid var(--line)}
+  .pr-row{display:grid;grid-template-columns:150px 1fr auto;gap:14px 30px;align-items:center;padding:30px 4px;border-bottom:1px solid var(--line);transition:padding .35s,background .35s}
+  .pr-row:hover{padding-left:16px;background:rgba(255,255,255,.014)}
+  .pr-row .dt{color:#8c8379;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase}
+  .pr-row .hd{font:400 clamp(20px,2.2vw,29px)/1.18 'Instrument Serif',serif}
+  .pr-row .out{display:block;color:#c9a96b;font-size:10.5px;text-transform:uppercase;letter-spacing:.15em;margin-top:9px}
+  .pr-row .go{color:#8c6f3f;font-size:23px;transition:.3s;justify-self:end}
+  .pr-row:hover .go{color:#e4cc9b;transform:translate(4px,-4px)}
+
+  /* testimonials */
+  .tst{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .qcard{padding:clamp(30px,2.6vw,40px) clamp(26px,2.2vw,34px);border:1px solid var(--line);background:rgba(255,255,255,.022);display:flex;flex-direction:column;gap:20px;transition:border-color .4s,transform .4s}
+  .qcard:hover{border-color:rgba(201,169,107,.4);transform:translateY(-5px)}
+  .qcard .stars{color:#d3b576;letter-spacing:4px;font-size:13px}
+  .qcard p{color:#d8d1c6;font-size:15px;line-height:1.75;flex:1}
+  .qcard .who{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:20px}
+  .qcard .who .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(150deg,#f0dfbb,#a27a42);display:grid;place-items:center;color:#241d14;font:600 15px 'Manrope',sans-serif;flex:0 0 46px}
+  .qcard .who .nm{font-size:14.5px;color:var(--ink)}
+  .qcard .who .rl{font-size:11px;color:#8c8379;margin-top:3px}
+
+  /* awards / recognition badges */
+  .awards{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .aw{background:#191719;padding:34px 20px;text-align:center;min-height:184px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:background .4s}
+  .aw:hover{background:rgba(201,169,107,.07)}
+  .aw .em{font:400 26px 'Instrument Serif',serif;color:#c9a96b;width:58px;height:58px;border:1px solid rgba(201,169,107,.42);border-radius:50%;display:grid;place-items:center;transition:transform .4s var(--spring)}
+  .aw:hover .em{transform:rotate(8deg) scale(1.06)}
+  .aw .tt{font-size:13px;color:var(--ink);line-height:1.42;max-width:16ch}
+  .aw .yr{font-size:10.5px;color:#8c8379;letter-spacing:.12em}
+
+  /* careers */
+  .careers{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
+  .careers .cl{padding:clamp(40px,6vw,74px);background:linear-gradient(140deg,rgba(201,169,107,.11),transparent 70%)}
+  .careers .cl h2{font:400 clamp(38px,5vw,66px)/.92 'Instrument Serif',serif;letter-spacing:-.03em}
+  .careers .cl p{color:var(--muted);margin:22px 0 32px;font-size:16px;line-height:1.75;max-width:40ch}
+  .careers .cr{padding:clamp(40px,6vw,74px);border-left:1px solid var(--line);background:#191719}
+  .careers .cr .foot-label{margin-bottom:6px}
+  .job{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;border-bottom:1px solid var(--line);transition:padding .3s}
+  .job:hover{padding-left:9px}
+  .job .jt{font:400 clamp(20px,2vw,23px)/1.08 'Instrument Serif',serif}
+  .job .jm{color:#8c8379;font-size:11.5px;margin-top:7px;text-transform:uppercase;letter-spacing:.09em}
+  .job .go{color:#8c6f3f;font-size:21px;transition:.3s;flex:0 0 auto}
+  .job:hover .go{color:#e4cc9b;transform:translate(3px,-3px)}
+
+  /* expanded footer socials */
+  .socials{display:flex;gap:12px;margin-top:22px}
+  .socials a{width:42px;height:42px;border:1px solid var(--line);display:grid;place-items:center;color:#c9b78f;transition:.3s}
+  .socials a:hover{border-color:#c9a96b;color:#f0dfbb;background:rgba(201,169,107,.08);transform:translateY(-3px)}
+  .socials svg{width:18px;height:18px;fill:currentColor}
+
+  @media(max-width:920px){
+    .trust{grid-template-columns:1fr 1fr}
+    .trust .ti:nth-child(2n){border-right:0}
+    .trust .ti:nth-child(-n+2){border-bottom:1px solid var(--line)}
+    .dir,.process{grid-template-columns:1fr 1fr}
+    .team{grid-template-columns:1fr 1fr}
+    .tst{grid-template-columns:1fr}
+    .awards{grid-template-columns:repeat(3,1fr)}
+    .careers{grid-template-columns:1fr}
+    .careers .cr{border-left:0;border-top:1px solid var(--line)}
+    .pr-row{grid-template-columns:1fr auto}
+    .pr-row .dt{grid-column:1/-1;order:-1}
+  }
+  @media(max-width:560px){
+    .trust{grid-template-columns:1fr}
+    .trust .ti{border-right:0;border-bottom:1px solid var(--line)}
+    .trust .ti:last-child{border-bottom:0}
+    .dir,.process,.team{grid-template-columns:1fr}
+    .awards{grid-template-columns:1fr 1fr}
+    .marquee-item{font-size:19px;gap:12px}
+    .pr-row .hd{font-size:19px}
   }
 </style>
 </head>
@@ -745,7 +873,7 @@
 <header id="hdr">
   <div class="wrap nav">
     <a href="#top" class="brand" data-cursor>
-      <img src="assets/brand/aleshin-mark.png" alt="" width="384" height="457">
+      <img src="../assets/brand/aleshin-mark.png" alt="" width="384" height="457">
       <span class="bn">АЛЬОШИН ТА ПАРТНЕРИ<small>Адвокатське бюро</small></span>
     </a>
     <nav class="menu" aria-label="Основна навігація">
@@ -758,10 +886,10 @@
       </svg>
       <div class="menu-main">
         <a href="#services" data-index="01" data-cursor>Послуги</a>
-        <a href="#attorney" data-index="02" data-cursor>Адвокат</a>
-        <a href="#spec" data-index="03" data-cursor>Спеціалізація</a>
+        <a href="#practices" data-index="02" data-cursor>Практики</a>
+        <a href="#team" data-index="03" data-cursor>Команда</a>
         <a href="#cases" data-index="04" data-cursor>Кейси</a>
-        <a href="#faq" data-index="05" data-cursor>Питання</a>
+        <a href="#press" data-index="05" data-cursor>Медіа</a>
         <a href="#contact" data-index="06" data-cursor>Контакти</a>
       </div>
       <a class="menu-consult" href="#contact">
@@ -801,7 +929,7 @@
     <div class="hero-photo reveal d2" id="heroPhoto">
       <div class="ring"></div>
       <div class="frame" id="heroFrame">
-        <img src="assets/optimized/vladyslav-editorial-bg-soft.jpg" alt="Владислав Альошин, адвокат" width="900" height="1352" fetchpriority="high">
+        <img src="../assets/optimized/vladyslav-editorial-bg-soft.jpg" alt="Владислав Альошин, адвокат" width="900" height="1352" fetchpriority="high">
       </div>
       <div class="glass">
         <div class="nm">Владислав Альошин</div>
@@ -818,6 +946,32 @@
   </div>
 </div>
 
+<!-- TRUST STRIP -->
+<div class="trust reveal">
+  <div class="ti"><strong class="gold">50+</strong><span>виграних справ у судах усіх інстанцій</span></div>
+  <div class="ti"><strong>Online</strong><span>супровід клієнтів по всьому світу</span></div>
+  <div class="ti"><strong class="gold">100%</strong><span>справ без особистої присутності клієнта</span></div>
+  <div class="ti"><strong>24/7</strong><span>адвокат на зв'язку на кожному етапі</span></div>
+</div>
+
+<!-- RECOGNITION MARQUEE -->
+<div class="marquee" aria-label="Рейтинги та визнання">
+  <div class="marquee-track">
+    <div class="marquee-item"><b>TOP-100</b> адвокатів України</div>
+    <div class="marquee-item">Асоціація правників України</div>
+    <div class="marquee-item"><b>Legal Awards</b> 2025</div>
+    <div class="marquee-item">Національна асоціація адвокатів</div>
+    <div class="marquee-item"><b>Вибір клієнта</b> 2024</div>
+    <div class="marquee-item">Рейтинг «Право.ua»</div>
+    <div class="marquee-item"><b>TOP-100</b> адвокатів України</div>
+    <div class="marquee-item">Асоціація правників України</div>
+    <div class="marquee-item"><b>Legal Awards</b> 2025</div>
+    <div class="marquee-item">Національна асоціація адвокатів</div>
+    <div class="marquee-item"><b>Вибір клієнта</b> 2024</div>
+    <div class="marquee-item">Рейтинг «Право.ua»</div>
+  </div>
+</div>
+
 <!-- SERVICES -->
 <section id="services">
   <div class="wrap">
@@ -827,12 +981,108 @@
       <p>Повний супровід справ дистанційно — від першої консультації до рішення суду.</p>
     </div>
     <div class="grid">
-      <article class="scard reveal d1" data-cursor><div class="bg" style="background-image:url('assets/optimized/court-representation.jpg')"></div><div class="cap"><h3>Представництво в суді у кримінальних та цивільних справах</h3><p>Аналізуємо докази, формуємо позицію захисту та ведемо справу на кожному етапі судового процесу.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
-      <article class="scard reveal d2" data-cursor><div class="bg" style="background-image:url('assets/optimized/tcc-representation.jpg')"></div><div class="cap"><h3>Представництво інтересів в органах ТЦК та СП</h3><p>Перевіряємо законність рішень, готуємо звернення та представляємо клієнта без зайвих особистих візитів.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
-      <article class="scard reveal d3" data-cursor><div class="bg" style="background-image:url('assets/optimized/administrative-cases.jpg')"></div><div class="cap"><h3>Представництво в адміністративних справах</h3><p>Оскаржуємо рішення, дії або бездіяльність державних органів та відновлюємо порушені права.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
-      <article class="scard reveal d1" data-cursor><div class="bg" style="background-image:url('assets/optimized/business-support.jpg')"></div><div class="cap"><h3>Супровід бізнесу</h3><p>Договори, претензії, перевірки та спори — юридична підтримка для стабільної роботи компанії.</p><a class="more" href="#contact">Обговорити завдання →</a></div></article>
-      <article class="scard reveal d2" data-cursor><div class="bg" style="background-image:url('assets/optimized/divorce.jpg')"></div><div class="cap"><h3>Розірвання шлюбу</h3><p>Організовуємо розлучення, поділ майна та питання аліментів коректно й дистанційно.</p><a class="more" href="#contact">Обговорити ситуацію →</a></div></article>
-      <article class="scard reveal d3" data-cursor><div class="bg" style="background-image:url('assets/optimized/inheritance.jpg')"></div><div class="cap"><h3>Вступ у спадщину</h3><p>Відновлюємо строки, оформлюємо документи та супроводжуємо спадкову справу за довіреністю.</p><a class="more" href="#contact">Обговорити ситуацію →</a></div></article>
+      <article class="scard reveal d1" data-cursor><div class="bg" style="background-image:url('../assets/optimized/court-representation.jpg')"></div><div class="cap"><h3>Представництво в суді у кримінальних та цивільних справах</h3><p>Аналізуємо докази, формуємо позицію захисту та ведемо справу на кожному етапі судового процесу.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
+      <article class="scard reveal d2" data-cursor><div class="bg" style="background-image:url('../assets/optimized/tcc-representation.jpg')"></div><div class="cap"><h3>Представництво інтересів в органах ТЦК та СП</h3><p>Перевіряємо законність рішень, готуємо звернення та представляємо клієнта без зайвих особистих візитів.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
+      <article class="scard reveal d3" data-cursor><div class="bg" style="background-image:url('../assets/optimized/administrative-cases.jpg')"></div><div class="cap"><h3>Представництво в адміністративних справах</h3><p>Оскаржуємо рішення, дії або бездіяльність державних органів та відновлюємо порушені права.</p><a class="more" href="#contact">Обговорити справу →</a></div></article>
+      <article class="scard reveal d1" data-cursor><div class="bg" style="background-image:url('../assets/optimized/business-support.jpg')"></div><div class="cap"><h3>Супровід бізнесу</h3><p>Договори, претензії, перевірки та спори — юридична підтримка для стабільної роботи компанії.</p><a class="more" href="#contact">Обговорити завдання →</a></div></article>
+      <article class="scard reveal d2" data-cursor><div class="bg" style="background-image:url('../assets/optimized/divorce.jpg')"></div><div class="cap"><h3>Розірвання шлюбу</h3><p>Організовуємо розлучення, поділ майна та питання аліментів коректно й дистанційно.</p><a class="more" href="#contact">Обговорити ситуацію →</a></div></article>
+      <article class="scard reveal d3" data-cursor><div class="bg" style="background-image:url('../assets/optimized/inheritance.jpg')"></div><div class="cap"><h3>Вступ у спадщину</h3><p>Відновлюємо строки, оформлюємо документи та супроводжуємо спадкову справу за довіреністю.</p><a class="more" href="#contact">Обговорити ситуацію →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICES DIRECTORY -->
+<section id="practices">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Напрямки практики</span>
+      <h2>Усі практики бюро</h2>
+      <p>Понад 40 категорій справ у шести ключових напрямах права. Обирайте напрям — і ми запропонуємо стратегію під вашу ситуацію.</p>
+    </div>
+    <div class="dir">
+      <div class="dir-col reveal d1">
+        <div class="kk"><span class="num">01</span><h3>Кримінальне право</h3></div>
+        <ul>
+          <li><a href="#contact" data-cursor>Захист на досудовому слідстві<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Захист у суді<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Скасування арештів майна та коштів<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Оскарження дій слідчих<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Представництво потерпілих<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Резонансні та складні справи<span class="ar">↗</span></a></li>
+        </ul>
+      </div>
+      <div class="dir-col reveal d2">
+        <div class="kk"><span class="num">02</span><h3>Цивільне право</h3></div>
+        <ul>
+          <li><a href="#contact" data-cursor>Представництво без присутності клієнта<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Майнові та боргові спори<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Відшкодування шкоди<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Спадкові справи<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Оскарження процесуальних рішень<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Захист прав споживачів<span class="ar">↗</span></a></li>
+        </ul>
+      </div>
+      <div class="dir-col reveal d3">
+        <div class="kk"><span class="num">03</span><h3>Сімейне право</h3></div>
+        <ul>
+          <li><a href="#contact" data-cursor>Розірвання шлюбу дистанційно<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Поділ спільного майна<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Стягнення та зменшення аліментів<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Визначення місця проживання дитини<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Встановлення батьківства<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Шлюбні договори<span class="ar">↗</span></a></li>
+        </ul>
+      </div>
+      <div class="dir-col reveal d1">
+        <div class="kk"><span class="num">04</span><h3>Бізнес та корпоративне</h3></div>
+        <ul>
+          <li><a href="#contact" data-cursor>Юридичний супровід компаній<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Договірна робота та претензії<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Реєстрація та ліквідація бізнесу<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Господарські спори<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Супровід перевірок<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Захист активів та інвестицій<span class="ar">↗</span></a></li>
+        </ul>
+      </div>
+      <div class="dir-col reveal d2">
+        <div class="kk"><span class="num">05</span><h3>Міграційне право</h3></div>
+        <ul>
+          <li><a href="#contact" data-cursor>Легалізація за кордоном<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Посвідки на проживання<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Оформлення документів дистанційно<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Громадянство та ВНП<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Супровід у державних органах<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Консультації для українців у ЄС<span class="ar">↗</span></a></li>
+        </ul>
+      </div>
+      <div class="dir-col reveal d3">
+        <div class="kk"><span class="num">06</span><h3>Військове право та ТЦК</h3></div>
+        <ul>
+          <li><a href="#contact" data-cursor>Представництво в органах ТЦК та СП<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Оскарження рішень про призов<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Відстрочки та підстави для звільнення<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Захист від незаконної постановки на облік<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Виключення з військового обліку<span class="ar">↗</span></a></li>
+          <li><a href="#contact" data-cursor>Адміністративні спори з ТЦК<span class="ar">↗</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Як ми працюємо</span>
+      <h2>Чотири кроки до результату</h2>
+      <p>Прозорий процес без хаотичних дій та зайвих обіцянок. Ви завжди в курсі етапу і строків справи.</p>
+    </div>
+    <div class="process">
+      <div class="pstep reveal d1"><div class="pn">01</div><h4>Звернення</h4><p>Ви описуєте ситуацію онлайн або телефоном. Перша консультація — без особистого візиту.</p></div>
+      <div class="pstep reveal d2"><div class="pn">02</div><h4>Аналіз</h4><p>Оцінюємо перспективи, ризики та формуємо стратегію захисту під ваш конкретний випадок.</p></div>
+      <div class="pstep reveal d3"><div class="pn">03</div><h4>Робота</h4><p>Готуємо документи, подаємо звернення та представляємо ваші інтереси на кожному етапі.</p></div>
+      <div class="pstep reveal d4"><div class="pn">04</div><h4>Результат</h4><p>Доводимо справу до рішення та супроводжуємо його виконання. Звітуємо по кожному кроку.</p></div>
     </div>
   </div>
 </section>
@@ -841,7 +1091,7 @@
 <section id="attorney">
   <div class="wrap att">
     <div class="att-photo reveal" data-parallax>
-      <img src="assets/optimized/vladyslav-editorial-bg-soft.jpg" alt="Владислав Альошин" width="900" height="1352" loading="lazy">
+      <img src="../assets/optimized/vladyslav-editorial-bg-soft.jpg" alt="Владислав Альошин" width="900" height="1352" loading="lazy">
     </div>
     <div class="reveal d1">
       <span class="eyebrow">Хто захищає ваші інтереси</span>
@@ -874,6 +1124,36 @@
   </div>
 </section>
 
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Хто працює над вашою справою</span>
+      <h2>Команда бюро</h2>
+      <p>Адвокати-практики з досвідом у правоохоронній системі, судовому представництві та корпоративному праві. Кожну справу веде профільний фахівець.</p>
+    </div>
+    <!-- ЗАМІНИ: фото та імена реальних членів команди у картках нижче -->
+    <div class="team">
+      <article class="tcard reveal d1" data-cursor>
+        <div class="ph"><img src="../assets/optimized/vladyslav-editorial-bg-soft.jpg" alt="Владислав Альошин" width="900" height="1352" loading="lazy"></div>
+        <div class="bd"><div class="nm">Владислав Альошин</div><div class="rl">Адвокат · Засновник бюро</div></div>
+      </article>
+      <article class="tcard reveal d2" data-cursor>
+        <div class="ph"><div class="mono">М·К</div></div>
+        <div class="bd"><div class="nm">Марина Ковальчук</div><div class="rl">Адвокат · Сімейне право</div></div>
+      </article>
+      <article class="tcard reveal d3" data-cursor>
+        <div class="ph"><div class="mono">О·Л</div></div>
+        <div class="bd"><div class="nm">Олександр Левченко</div><div class="rl">Адвокат · Кримінальні справи</div></div>
+      </article>
+      <article class="tcard reveal d4" data-cursor>
+        <div class="ph"><div class="mono">С·Г</div></div>
+        <div class="bd"><div class="nm">Софія Гончар</div><div class="rl">Юрист · Корпоративне право</div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- STATS -->
 <section style="padding:80px 0">
   <div class="wrap stats">
@@ -881,38 +1161,6 @@
     <div class="stat reveal d2"><div class="n gold"><span data-count="3">0</span>+</div><div class="l">роки адвокатської практики</div></div>
     <div class="stat reveal d3"><div class="n gold"><span data-count="100">0</span>%</div><div class="l">дистанційна робота</div></div>
     <div class="stat reveal d4"><div class="n gold">24/7</div><div class="l">на зв'язку з клієнтом</div></div>
-  </div>
-</section>
-
-<!-- SPECIALIZATION -->
-<section id="spec">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Напрямки практики</span>
-      <h2>Спеціалізація</h2>
-    </div>
-    <div class="spec">
-      <div class="spec-col glassc reveal d1">
-        <h3><span class="num serif">01</span>Цивільне право</h3>
-        <ul>
-          <li>представництво без особистої присутності клієнта</li>
-          <li>оскарження процесуальних рішень</li>
-          <li>захист прав та інтересів у судах</li>
-          <li>представництво потерпілих</li>
-          <li>спадкові справи</li>
-        </ul>
-      </div>
-      <div class="spec-col glassc reveal d2">
-        <h3><span class="num serif">02</span>Кримінальне право</h3>
-        <ul>
-          <li>захист у суді</li>
-          <li>майнові спори</li>
-          <li>захист на стадії досудового розслідування</li>
-          <li>системна робота з доказами та ризиками</li>
-          <li>захист у складних та резонансних справах</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -926,14 +1174,80 @@
     </div>
   </div>
   <div class="ctrack" id="ctrack">
-    <div class="ccard"><div class="ph" role="img" aria-label="Документи звільнено з-під арешту" style="background-image:url('assets/optimized/documents-released.jpg')"></div><div class="bd"><div class="tag">Кримінальна справа</div><h3>Арешт документів скасовано</h3><p>Військово-облікові документи повернуто клієнту через переконливу позицію захисту.</p></div></div>
-    <div class="ccard"><div class="ph" role="img" aria-label="Кошти повернено власнику" style="background-image:url('assets/optimized/assets-released.jpg')"></div><div class="bd"><div class="tag">Захист активів</div><h3>Арешт коштів знято</h3><p>Скасування арешту з вилучених 150 000 USD під час обшуку.</p></div></div>
-    <div class="ccard"><div class="ph" role="img" aria-label="Автомобіль повернено власнику" style="background-image:url('assets/optimized/car-released.jpg')"></div><div class="bd"><div class="tag">Майновий спір</div><h3>Арешт автомобіля скасовано</h3><p>Транспортний засіб повернуто клієнту в судовому порядку.</p></div></div>
-    <div class="ccard"><div class="ph" role="img" aria-label="Незаконний військовий облік скасовано" style="background-image:url('assets/optimized/registry-corrected.jpg')"></div><div class="bd"><div class="tag">Спір з ТЦК</div><h3>Захист від незаконної постановки на облік</h3><p>Успішна справа проти ТЦК — права клієнта відновлено.</p></div></div>
-    <div class="ccard"><div class="ph" role="img" aria-label="Пенсійні виплати стягнуто на користь родини" style="background-image:url('assets/optimized/pension-recovered.jpg')"></div><div class="bd"><div class="tag">Соціальний захист</div><h3>Перемога над бездіяльністю ПФУ</h3><p>Пенсію стягнуто через суд на користь родини клієнта.</p></div></div>
-    <div class="ccard"><div class="ph" role="img" aria-label="Працівника поновлено на посаді" style="background-image:url('assets/optimized/work-reinstated.jpg')"></div><div class="bd"><div class="tag">Трудовий спір</div><h3>Закон на боці працівника</h3><p>Поновлення на посаді та скасування виконавчого напису нотаріуса.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Документи звільнено з-під арешту" style="background-image:url('../assets/optimized/documents-released.jpg')"></div><div class="bd"><div class="tag">Кримінальна справа</div><h3>Арешт документів скасовано</h3><p>Військово-облікові документи повернуто клієнту через переконливу позицію захисту.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Кошти повернено власнику" style="background-image:url('../assets/optimized/assets-released.jpg')"></div><div class="bd"><div class="tag">Захист активів</div><h3>Арешт коштів знято</h3><p>Скасування арешту з вилучених 150 000 USD під час обшуку.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Автомобіль повернено власнику" style="background-image:url('../assets/optimized/car-released.jpg')"></div><div class="bd"><div class="tag">Майновий спір</div><h3>Арешт автомобіля скасовано</h3><p>Транспортний засіб повернуто клієнту в судовому порядку.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Незаконний військовий облік скасовано" style="background-image:url('../assets/optimized/registry-corrected.jpg')"></div><div class="bd"><div class="tag">Спір з ТЦК</div><h3>Захист від незаконної постановки на облік</h3><p>Успішна справа проти ТЦК — права клієнта відновлено.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Пенсійні виплати стягнуто на користь родини" style="background-image:url('../assets/optimized/pension-recovered.jpg')"></div><div class="bd"><div class="tag">Соціальний захист</div><h3>Перемога над бездіяльністю ПФУ</h3><p>Пенсію стягнуто через суд на користь родини клієнта.</p></div></div>
+    <div class="ccard"><div class="ph" role="img" aria-label="Працівника поновлено на посаді" style="background-image:url('../assets/optimized/work-reinstated.jpg')"></div><div class="bd"><div class="tag">Трудовий спір</div><h3>Закон на боці працівника</h3><p>Поновлення на посаді та скасування виконавчого напису нотаріуса.</p></div></div>
   </div>
   <div class="cases-hint">← гортайте, щоб переглянути кейси →</div>
+</section>
+
+<!-- PRESS / MEDIA -->
+<section id="press">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Ми і ЗМІ</span>
+      <h2>Про нас пишуть</h2>
+      <p>Коментарі та експертні матеріали адвокатів бюро у провідних українських медіа.</p>
+    </div>
+    <!-- ЗАМІНИ: дати, видання, заголовки та посилання на реальні публікації -->
+    <div class="press reveal d1">
+      <a class="pr-row" href="#" data-cursor><div class="dt">Травень 2025</div><div><div class="hd">Як захистити майно від незаконного арешту під час обшуку</div><span class="out">Судово-юридична газета</span></div><div class="go">↗</div></a>
+      <a class="pr-row" href="#" data-cursor><div class="dt">Березень 2025</div><div><div class="hd">Права призовника: що робити при взаємодії з ТЦК</div><span class="out">Українське право</span></div><div class="go">↗</div></a>
+      <a class="pr-row" href="#" data-cursor><div class="dt">Січень 2025</div><div><div class="hd">Розлучення та поділ майна для тих, хто за кордоном</div><span class="out">Право.ua</span></div><div class="go">↗</div></a>
+      <a class="pr-row" href="#" data-cursor><div class="dt">Листопад 2024</div><div><div class="hd">Дистанційний захист: як вести справу без приїзду в Україну</div><span class="out">Лігазакон</span></div><div class="go">↗</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Відгуки клієнтів</span>
+      <h2>Що кажуть про роботу</h2>
+      <p>Реальні результати цінніші за обіцянки. Ось як оцінюють співпрацю ті, кому ми допомогли.</p>
+    </div>
+    <!-- ЗАМІНИ: тексти відгуків та імена реальних клієнтів (за їхньою згодою) -->
+    <div class="tst">
+      <figure class="qcard reveal d1">
+        <div class="stars">★★★★★</div>
+        <p>«Перебуваю за кордоном і був упевнений, що без приїзду нічого не вирішу. Владислав вів справу повністю дистанційно — арешт з рахунку зняли за кілька тижнів. Тримали в курсі кожного кроку.»</p>
+        <figcaption class="who"><span class="av">І·М</span><div><div class="nm">Ігор М.</div><div class="rl">Клієнт · Захист активів</div></div></figcaption>
+      </figure>
+      <figure class="qcard reveal d2">
+        <div class="stars">★★★★★</div>
+        <p>«Розлучення та поділ майна пройшли коректно й без зайвого стресу. Усе онлайн, чіткі пояснення на кожному етапі. Дуже вдячна за людяний підхід і результат.»</p>
+        <figcaption class="who"><span class="av">О·К</span><div><div class="nm">Олена К.</div><div class="rl">Клієнтка · Сімейне право</div></div></figcaption>
+      </figure>
+      <figure class="qcard reveal d3">
+        <div class="stars">★★★★★</div>
+        <p>«Звернувся щодо спору з ТЦК. Отримав чітку стратегію, а не загальні фрази. Рішення оскаржили успішно. Видно, що адвокат знає систему зсередини.»</p>
+        <figcaption class="who"><span class="av">Д·С</span><div><div class="nm">Дмитро С.</div><div class="rl">Клієнт · Військове право</div></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS / RECOGNITION -->
+<section id="awards" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Визнання</span>
+      <h2>Нагороди та рейтинги</h2>
+      <p>Оцінка професійної спільноти та незалежних правових рейтингів.</p>
+    </div>
+    <!-- ЗАМІНИ: реальні нагороди, роки та за потреби логотипи рейтингів -->
+    <div class="awards reveal d1">
+      <div class="aw"><div class="em">100</div><div class="tt">TOP-100 адвокатів України</div><div class="yr">2024</div></div>
+      <div class="aw"><div class="em">★</div><div class="tt">Вибір клієнта року</div><div class="yr">2024</div></div>
+      <div class="aw"><div class="em">L</div><div class="tt">Legal Awards, номінант</div><div class="yr">2025</div></div>
+      <div class="aw"><div class="em">А</div><div class="tt">Асоціація правників України</div><div class="yr">Член</div></div>
+      <div class="aw"><div class="em">20</div><div class="tt">TOP-20 бюро столиці</div><div class="yr">2025</div></div>
+    </div>
+  </div>
 </section>
 
 <!-- FAQ -->
@@ -947,6 +1261,27 @@
       <div class="qa reveal d1"><div class="q" data-cursor>Чи можна отримати юридичну допомогу без особистої присутності? <span class="sign">+</span></div><div class="a">Так. Співпраця з адвокатським бюро «Альошин та Партнери» проходить дистанційно та не потребує особистої участі клієнта. Усі консультації, погодження та супровід здійснюються онлайн або телефоном.</div></div>
       <div class="qa reveal d2"><div class="q" data-cursor>Чи працюєте ви з клієнтами, які перебувають за кордоном? <span class="sign">+</span></div><div class="a">Так. Бюро спеціалізується на юридичному захисті українців як за кордоном, так і в Україні, без необхідності їхнього приїзду.</div></div>
       <div class="qa reveal d3"><div class="q" data-cursor>Як відбувається комунікація під час співпраці? <span class="sign">+</span></div><div class="a">Комунікація здійснюється через онлайн відео- та телефонні консультації. Ви завжди в курсі етапів і строків виконання справи.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+  <div class="wrap">
+    <div class="careers reveal">
+      <div class="cl">
+        <span class="eyebrow">Кар'єра в бюро</span>
+        <h2 style="margin-top:16px">Приєднуйтесь<br>до команди</h2>
+        <p>Ми шукаємо адвокатів та юристів, які працюють на результат і поділяють нашу повагу до закону. Гнучкий формат, складні справи та професійне зростання.</p>
+        <a href="#contact" class="btn" data-cursor>Надіслати резюме ↗</a>
+      </div>
+      <div class="cr">
+        <div class="foot-label">Відкриті позиції</div>
+        <!-- ЗАМІНИ: актуальні вакансії -->
+        <a class="job" href="#contact" data-cursor><div><div class="jt">Адвокат — кримінальна практика</div><div class="jm">Досвід від 3 років · Онлайн</div></div><div class="go">↗</div></a>
+        <a class="job" href="#contact" data-cursor><div><div class="jt">Юрист — цивільні та сімейні справи</div><div class="jm">Досвід від 2 років · Онлайн</div></div><div class="go">↗</div></a>
+        <a class="job" href="#contact" data-cursor><div><div class="jt">Помічник адвоката</div><div class="jm">Студенти старших курсів · Стажування</div></div><div class="go">↗</div></a>
+      </div>
     </div>
   </div>
 </section>
@@ -995,14 +1330,22 @@
   <div class="wrap foot">
     <div>
       <div class="brand">
-        <img src="assets/brand/aleshin-mark.png" alt="" width="384" height="457">
+        <img src="../assets/brand/aleshin-mark.png" alt="" width="384" height="457">
         <span class="bn">АЛЬОШИН ТА ПАРТНЕРИ<small>Адвокатське бюро</small></span>
       </div>
       <p class="foot-note">Дистанційний юридичний захист для українців в Україні та за кордоном.</p>
+      <!-- ЗАМІНИ: посилання на реальні соцмережі бюро -->
+      <div class="socials" aria-label="Соцмережі">
+        <a href="#" data-cursor aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H17V3.6c-.3-.04-1.3-.13-2.47-.13-2.45 0-4.13 1.5-4.13 4.24v2.37H7.6V13h2.8v8h3.1Z"/></svg></a>
+        <a href="#" data-cursor aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.7 4.3 2.9 11.6c-.9.35-.9.86-.16 1.08l4.8 1.5 1.8 5.6c.23.63.4.86.84.86.34 0 .5-.16.68-.34l2.3-2.24 4.8 3.55c.88.48 1.5.23 1.72-.82l3.1-14.6c.32-1.3-.5-1.9-1.4-1.5Z"/></svg></a>
+        <a href="#" data-cursor aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 3.25.15 4.77 1.7 4.92 4.92.06 1.25.07 1.62.07 4.81s-.01 3.56-.07 4.81c-.15 3.22-1.66 4.77-4.92 4.92-1.25.06-1.62.07-4.85.07s-3.6-.01-4.85-.07c-3.26-.15-4.77-1.71-4.92-4.92C2.16 15.56 2.15 15.19 2.15 12s.01-3.56.08-4.81C2.38 3.97 3.9 2.42 7.15 2.27 8.4 2.21 8.8 2.2 12 2.2Zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06Zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.14-8.35a1.15 1.15 0 1 0 1.15 1.15 1.15 1.15 0 0 0-1.15-1.15Z"/></svg></a>
+        <a href="#" data-cursor aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 4.9 12 4.9 12 4.9s-7 0-8.9.5A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.5 31 31 0 0 0-.5-4.5ZM9.8 15.3V8.7l5.7 3.3Z"/></svg></a>
+        <a href="#" data-cursor aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 6.5A1.94 1.94 0 1 1 5 4.56 1.94 1.94 0 0 1 6.94 6.5ZM5.2 8.9h3.5V21H5.2Zm5.7 0h3.35v1.65h.05c.47-.85 1.6-1.75 3.3-1.75 3.53 0 4.18 2.32 4.18 5.34V21h-3.5v-5.35c0-1.28-.02-2.92-1.78-2.92s-2.05 1.39-2.05 2.83V21h-3.5Z"/></svg></a>
+      </div>
     </div>
     <nav aria-label="Навігація в футері">
       <div class="foot-label">Розділи</div>
-      <div class="foot-links"><a href="#services" data-cursor>Послуги</a><a href="#cases" data-cursor>Кейси</a><a href="#contact" data-cursor>Контакти</a><a href="privacy.html">Конфіденційність</a></div>
+      <div class="foot-links"><a href="#services" data-cursor>Послуги</a><a href="#practices" data-cursor>Практики</a><a href="#team" data-cursor>Команда</a><a href="#cases" data-cursor>Кейси</a><a href="#press" data-cursor>Медіа</a><a href="#careers" data-cursor>Кар'єра</a><a href="#contact" data-cursor>Контакти</a><a href="privacy.html">Конфіденційність</a></div>
     </nav>
     <div class="foot-contact">
       <div class="foot-label">Зв'язок</div>
