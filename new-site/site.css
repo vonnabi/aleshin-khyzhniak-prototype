@@ -78,7 +78,9 @@ main,.site-footer{position:relative;z-index:3}
 .case .tag,.article time{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.1em}
 .case h2,.article h2{font:500 clamp(21px,3vw,30px) var(--serif)}
 .case p,.article p{margin-top:8px;color:var(--muted);font-size:14px}
-.case .go,.article .go{color:var(--gold);font-size:24px}
+.case .go,.article .go{color:var(--gold);font-size:0}
+.go::before,.ar::before{content:"";display:inline-block;width:18px;height:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M3.5 14.5 14.5 3.5M7 3.5h7.5V11' fill='none' stroke='%23c9a96b' stroke-width='1.25' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E") center/contain no-repeat}
+.go>.brand-arrow,.ar>.brand-arrow{display:none}
 .contact{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px}
 .contact-row{padding:24px 0;border-bottom:1px solid var(--line)}
 .contact-row small{display:block;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
