@@ -28,6 +28,27 @@ document.body.insertAdjacentHTML('afterbegin',`
   <div class="scroll-progress" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div><div class="cursor-dot" aria-hidden="true"></div>
 `);
 
+const brandArrow='<svg class="brand-arrow" viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 14.5 14.5 3.5M7 3.5h7.5V11"/></svg>';
+function replaceArrowText(elements,markup){
+elements.forEach(element=>{
+  [...element.childNodes].filter(node=>node.nodeType===Node.TEXT_NODE&&node.textContent.includes('↗')).forEach(node=>{
+    const parts=node.textContent.split('↗');
+    const fragment=document.createDocumentFragment();
+    parts.forEach((part,index)=>{
+      if(part)fragment.append(document.createTextNode(part.trimEnd()));
+      if(index<parts.length-1){
+        const template=document.createElement('template');
+        template.innerHTML=markup;
+        fragment.append(template.content.cloneNode(true));
+      }
+    });
+    node.replaceWith(fragment);
+  });
+});
+}
+replaceArrowText(document.querySelectorAll('.go,.ar'),brandArrow);
+replaceArrowText(document.querySelectorAll('.button,.btn'),'<span class="text-arrow" aria-hidden="true">↗︎</span>');
+
 const progress=document.querySelector('.scroll-progress');
 function updateChrome(){
   header?.classList.toggle('scrolled',scrollY>20);

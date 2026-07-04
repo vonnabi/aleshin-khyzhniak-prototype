@@ -155,6 +155,9 @@
   .btn.ghost{background:transparent;color:var(--gold1);border:1px solid rgba(207,168,105,.45);box-shadow:none}
   .btn.ghost:hover{border-color:var(--gold1);background:rgba(207,168,105,.08)}
   .btn.ghost::before{display:none}
+  .brand-arrow{display:inline-block;width:1.05em;height:1.05em;margin-left:.42em;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:square;stroke-linejoin:miter;vertical-align:-.13em}
+  .go .brand-arrow,.ar .brand-arrow{width:18px;height:18px;margin:0;vertical-align:middle}
+  .text-arrow{display:inline-block;margin-left:.42em;font-family:Arial,sans-serif;font-size:1.05em;font-weight:400;line-height:1;font-style:normal}
 
   /* HERO */
   .hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px}
@@ -1416,6 +1419,26 @@
 <script>
 document.documentElement.classList.add('js');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const brandArrow='<svg class="brand-arrow" viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 14.5 14.5 3.5M7 3.5h7.5V11"/></svg>';
+function replaceArrowText(elements,markup){
+elements.forEach(element=>{
+  [...element.childNodes].filter(node=>node.nodeType===Node.TEXT_NODE&&node.textContent.includes('↗')).forEach(node=>{
+    const parts=node.textContent.split('↗');
+    const fragment=document.createDocumentFragment();
+    parts.forEach((part,index)=>{
+      if(part)fragment.append(document.createTextNode(part.trimEnd()));
+      if(index<parts.length-1){
+        const template=document.createElement('template');
+        template.innerHTML=markup;
+        fragment.append(template.content.cloneNode(true));
+      }
+    });
+    node.replaceWith(fragment);
+  });
+});
+}
+replaceArrowText(document.querySelectorAll('.go,.ar'),brandArrow);
+replaceArrowText(document.querySelectorAll('.btn'),'<span class="text-arrow" aria-hidden="true">↗︎</span>');
 /* safety net: ensure all content becomes visible even if something fails */
 addEventListener('load',()=>setTimeout(()=>{
   document.querySelectorAll('.reveal:not(.in)').forEach(e=>e.classList.add('in'));
