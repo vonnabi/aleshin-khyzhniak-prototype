@@ -118,6 +118,7 @@
   .hero-coin-visual{display:block;top:47%;right:-245px;z-index:0;width:560px;opacity:.72;transform:translateY(-50%);filter:drop-shadow(0 24px 32px rgba(0,0,0,.26))}
   .home-hero::after{background:linear-gradient(180deg,rgba(15,14,16,.66) 0%,rgba(15,14,16,.62) 44%,rgba(15,14,16,.94) 100%)}
   .home-hero h1{font-size:clamp(43px,12vw,60px);letter-spacing:-.04em}
+  .home-hero .lead{margin-top:16px;max-width:34ch;font-size:14px;line-height:1.5}
   .home-numbers{grid-template-columns:1fr 1fr;margin-top:42px}.home-number:last-child{display:none}
   .home-block{padding:82px 0}.home-heading{gap:20px;margin-bottom:40px}.home-heading h2,.media-intro h2{font-size:50px}
   .authority-grid{grid-template-columns:1fr;gap:44px}.authority-content{padding-top:0}.authority-portrait{max-width:none;margin:0;padding-left:20px}.authority-photo{animation-name:authority-photo-float-mobile}.authority-portrait figcaption{left:0;bottom:24px;width:min(72%,270px);padding:14px 17px 13px 18px}.authority-portrait figcaption h2{font-size:23px}.authority-portrait figcaption span{margin-top:8px;font-size:7px}.authority-title{padding-bottom:28px}.authority-title h3{font-size:46px}.authority-copy{padding-top:28px}.authority-quote{padding-left:20px}
