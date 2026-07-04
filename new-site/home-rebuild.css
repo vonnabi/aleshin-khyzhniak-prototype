@@ -114,9 +114,11 @@
   .recognition-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
-  .home-hero{min-height:100svh;padding:118px 0 76px}
-  .home-hero-content{display:flex;flex-direction:column;justify-content:center;width:100%}
-  .hero-coin-visual{display:block;top:50%;left:50%;right:auto;z-index:0;width:min(118vw,640px);opacity:.62;transform:translate(-50%,-50%);filter:drop-shadow(0 24px 32px rgba(0,0,0,.26))}
+  .home-hero{min-height:100svh;padding:104px 0 58px;align-items:stretch}
+  .home-hero>.wrap{display:flex}
+  .home-hero-content{display:flex;flex-direction:column;justify-content:flex-start;width:100%}
+  .home-actions{margin-top:auto;padding-top:38px}
+  .hero-coin-visual{display:block;top:48%;right:-185px;left:auto;z-index:0;width:585px;opacity:.6;transform:translateY(-50%);filter:drop-shadow(0 24px 32px rgba(0,0,0,.26))}
   .home-hero::after{background:linear-gradient(180deg,rgba(15,14,16,.66) 0%,rgba(15,14,16,.62) 44%,rgba(15,14,16,.94) 100%)}
   .home-hero h1{font-size:clamp(43px,12vw,60px);letter-spacing:-.04em}
   .home-numbers{grid-template-columns:1fr 1fr;margin-top:42px}.home-number:last-child{display:none}
