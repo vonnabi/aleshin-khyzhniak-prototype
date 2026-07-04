@@ -5,12 +5,12 @@ const burger=document.querySelector('.burger');
 
 const innerMenu=document.querySelector('.links');
 if(innerMenu&&!innerMenu.querySelector('[data-home-link]')){
-  innerMenu.insertAdjacentHTML('afterbegin','<a href="/corporate" data-home-link>Головна</a>');
+  innerMenu.insertAdjacentHTML('afterbegin','<a href="aleshin-corporate.html" data-home-link>Головна</a>');
 }
 if(innerMenu){
   [...innerMenu.querySelectorAll(':scope > a:not(.menu-consult)')].forEach((link,index)=>link.dataset.index=String(index+1).padStart(2,'0'));
   innerMenu.insertAdjacentHTML('afterbegin','<svg class="menu-art" viewBox="0 0 360 360" aria-hidden="true"><circle cx="180" cy="180" r="150"/><circle class="dash" cx="180" cy="180" r="122"/><circle cx="180" cy="180" r="68"/><path d="M180 30C236 98 262 124 330 180C262 236 236 262 180 330C124 262 98 236 30 180C98 124 124 98 180 30Z"/><path d="M180 68C218 116 244 142 292 180C244 218 218 244 180 292C142 244 116 218 68 180C116 142 142 116 180 68Z"/></svg><span class="menu-caption">МЕНЮ</span>');
-  innerMenu.insertAdjacentHTML('beforeend','<a class="menu-consult" href="/contact.html"><span>Отримати консультацію</span><span class="menu-consult-arrow" aria-hidden="true">↗</span></a><div class="menu-meta"><div><small>Звʼязатися</small><a href="tel:+380994000303">+38 (099) 400 03 03</a></div><div class="online">Захист<br>і представництво</div></div>');
+  innerMenu.insertAdjacentHTML('beforeend','<a class="menu-consult" href="contact.html"><span>Отримати консультацію</span><span class="menu-consult-arrow" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M3.5 14.5 14.5 3.5M7 3.5h7.5V11"/></svg></span></a><div class="menu-meta"><div><small>Звʼязатися</small><a href="tel:+380994000303">+38 (099) 400 03 03</a></div><div class="online">Захист<br>і представництво</div></div>');
 }
 
 document.body.insertAdjacentHTML('afterbegin',`

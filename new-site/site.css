@@ -190,7 +190,8 @@ body.has-custom-cursor,body.has-custom-cursor a,body.has-custom-cursor button{cu
   .links .menu-consult::after{display:none}
   body.menu-open .links .menu-consult{opacity:1;transform:none;transition-delay:.5s}
   @keyframes inner-menu-shine{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
-  .menu-consult-arrow{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(36,29,20,.38);font-size:18px}
+.menu-consult-arrow{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(36,29,20,.38);font-size:18px}
+.menu-consult-arrow svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:square;stroke-linejoin:miter}
   .menu-meta{display:grid;position:relative;z-index:2;grid-template-columns:1fr auto;align-items:end;gap:16px;padding-top:15px;border-top:1px solid rgba(232,214,183,.16);opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s}
   body.menu-open .menu-meta{opacity:1;transform:none;transition-delay:.58s}
   .menu-meta small{display:block;margin-bottom:6px;color:#8f877f;font:600 8px/1.4 var(--sans);text-transform:uppercase;letter-spacing:.18em}
