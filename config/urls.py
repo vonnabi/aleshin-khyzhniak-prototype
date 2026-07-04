@@ -45,6 +45,24 @@ urlpatterns = [
         TemplateView.as_view(template_name="new-site/practices.html"),
         name="practices",
     ),
+    # --- Детальні сторінки практик ---
+    *[
+        path(
+            f"practice-{slug}.html",
+            TemplateView.as_view(
+                template_name=f"new-site/practice-{slug}.html"
+            ),
+            name=f"practice_{slug}",
+        )
+        for slug in (
+            "kryminalne",
+            "tsyvilne",
+            "simejne",
+            "korporatyvne",
+            "migraczijne",
+            "viiskove",
+        )
+    ],
     path(
         "team.html",
         TemplateView.as_view(template_name="new-site/team.html"),
@@ -76,6 +94,13 @@ urlpatterns = [
             template_name="new-site/site.css", content_type="text/css"
         ),
         name="corporate_styles",
+    ),
+    path(
+        "home-rebuild.css",
+        TemplateView.as_view(
+            template_name="new-site/home-rebuild.css", content_type="text/css"
+        ),
+        name="corporate_home_styles",
     ),
     path(
         "site.js",

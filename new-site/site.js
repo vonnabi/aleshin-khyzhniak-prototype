@@ -68,7 +68,7 @@ document.querySelectorAll('.links a').forEach(link=>link.addEventListener('click
   burger?.setAttribute('aria-expanded','false');
 }));
 
-const revealTargets=document.querySelectorAll('.metric,.card,.practice,.person,.case,.article,.split,.head,.contact-row,.form,.cta');
+const revealTargets=document.querySelectorAll('.metric,.card,.practice,.person,.case,.article,.split,.head,.contact-row,.form,.cta,.authority-title,.authority-portrait,.authority-copy,.home-heading,.practice-tile,.result-item,.media-intro,.media-row,.recognition-item');
 revealTargets.forEach((element,index)=>{
   element.classList.add('reveal-item');
   element.style.transitionDelay=`${Math.min(index%4,3)*70}ms`;
@@ -164,6 +164,24 @@ if(securityField){
   addEventListener('scroll',updateMorph,{passive:true});addEventListener('resize',updateMorph,{passive:true});updateMorph();
 }
 
+const heroCoinVisual=document.querySelector('[data-hero-coin]');
+if(heroCoinVisual&&!reduce&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+  let targetX=0,targetY=0,currentX=0,currentY=0,coinFrame=0;
+  const moveCoin=()=>{
+    currentX+=(targetX-currentX)*.075;
+    currentY+=(targetY-currentY)*.075;
+    heroCoinVisual.style.setProperty('--hero-parallax-x',`${currentX.toFixed(2)}px`);
+    heroCoinVisual.style.setProperty('--hero-parallax-y',`${currentY.toFixed(2)}px`);
+    coinFrame=requestAnimationFrame(moveCoin);
+  };
+  addEventListener('pointermove',event=>{
+    targetX=(event.clientX/innerWidth-.5)*22;
+    targetY=(event.clientY/innerHeight-.5)*16;
+    if(!coinFrame)coinFrame=requestAnimationFrame(moveCoin);
+  },{passive:true});
+  document.addEventListener('mouseleave',()=>{targetX=0;targetY=0;},{passive:true});
+}
+
 const form=document.querySelector('[data-contact-form]');
 form?.addEventListener('submit',event=>{
   event.preventDefault();
@@ -172,3 +190,64 @@ form?.addEventListener('submit',event=>{
   const body=encodeURIComponent(`Імʼя: ${data.get('name')}\nКонтакт: ${data.get('contact')}\n\nЗавдання:\n${data.get('message')}`);
   location.href=`mailto:aleshin.partners@ukr.net?subject=${subject}&body=${body}`;
 });
+
+/* FAQ accordion (service pages) */
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.setAttribute('aria-expanded','false');
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item');
+    const ans=item.querySelector('.faq-a');
+    const open=item.classList.toggle('open');
+    q.setAttribute('aria-expanded',String(open));
+    ans.style.maxHeight=open?ans.scrollHeight+'px':'';
+  });
+});
+
+/* Category filter bars (cases / team / media) */
+document.querySelectorAll('.filter-bar').forEach(bar=>{
+  const scope=bar.closest('section')||document;
+  const chips=bar.querySelectorAll('.filter-chip');
+  chips.forEach(chip=>chip.addEventListener('click',()=>{
+    chips.forEach(c=>c.classList.remove('is-on'));
+    chip.classList.add('is-on');
+    const cat=chip.dataset.filter;
+    scope.querySelectorAll('[data-cat]').forEach(el=>{
+      const show=(cat==='all'||el.dataset.cat===cat);
+      el.style.display=show?'':'none';
+      if(show)el.classList.add('is-visible');
+    });
+  }));
+});
+
+/* Practices mega-menu (desktop dropdown) */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  const trigger=[...document.querySelectorAll('.links > a')].find(a=>(a.getAttribute('href')||'').indexOf('practices.html')===0);
+  if(trigger){
+    const items=[
+      ['practice-kryminalne.html','Захист','Кримінальне право'],
+      ['practice-tsyvilne.html','Спори','Цивільне право'],
+      ['practice-simejne.html','Приватні клієнти','Сімейне право'],
+      ['practice-korporatyvne.html','Бізнес','Корпоративне право'],
+      ['practice-migraczijne.html','Мобільність','Міграційне право'],
+      ['practice-viiskove.html','ТЦК','Військове право']
+    ];
+    const panel=document.createElement('div');
+    panel.className='practices-mega';
+    panel.innerHTML=items.map(([href,tag,name])=>`<a href="${href}"><small>${tag}</small><b>${name}</b></a>`).join('');
+    document.body.appendChild(panel);
+    let hideTimer;
+    const place=()=>{
+      const r=trigger.getBoundingClientRect();
+      panel.style.top=`${r.bottom+14}px`;
+      const width=panel.offsetWidth||540;
+      panel.style.left=`${Math.min(r.left,innerWidth-width-20)}px`;
+    };
+    const show=()=>{clearTimeout(hideTimer);place();panel.classList.add('open');};
+    const hide=()=>{hideTimer=setTimeout(()=>panel.classList.remove('open'),150);};
+    trigger.addEventListener('mouseenter',show);
+    trigger.addEventListener('mouseleave',hide);
+    panel.addEventListener('mouseenter',show);
+    panel.addEventListener('mouseleave',hide);
+    addEventListener('scroll',()=>panel.classList.remove('open'),{passive:true});
+  }
+}
