@@ -210,7 +210,9 @@ body.has-custom-cursor,body.has-custom-cursor a,body.has-custom-cursor button{cu
   .metric-strip{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2){border-right:0}
 }
 @media(max-width:640px){
-  .wrap{width:100%;padding:0 20px}.logo img{width:auto;height:38px;max-width:60vw}.page-hero{padding:140px 0 70px}
+  .site-header{padding:5px 0}
+  .nav{height:52px;gap:14px}
+  .wrap{width:100%;padding:0 20px}.logo img{width:auto;height:46px;max-width:66vw}.page-hero{padding:140px 0 70px}
   .links{padding:104px 20px 20px}
   .menu-caption{top:88px;left:20px}
   .links>a:not(.menu-consult){grid-template-columns:30px 1fr auto;min-height:44px;font-size:clamp(25px,7.6vw,33px)}
