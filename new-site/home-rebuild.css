@@ -54,12 +54,12 @@
 .authority-portrait{position:relative;width:100%;max-width:590px;margin:18px 0 42px;padding-left:44px;justify-self:start}
 .authority-photo{position:relative;transform:rotate(-3deg);transform-origin:50% 70%;overflow:hidden;box-shadow:0 35px 80px rgba(0,0,0,.34);animation:authority-photo-float 9s ease-in-out infinite;transition:box-shadow .7s ease}
 .authority-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(201,169,107,.02),rgba(15,14,16,.25));pointer-events:none}
-.authority-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 31%;filter:saturate(.74) contrast(1.04);transform:scale(1.035);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .7s ease}
+.authority-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 42%;filter:saturate(.74) contrast(1.04);transform:scale(1.035);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .7s ease}
 .authority-portrait figcaption{position:absolute;left:-58px;bottom:58px;z-index:2;width:min(64%,344px);padding:26px 28px 26px 30px;border:1px solid rgba(201,169,107,.28);border-left:2px solid var(--gold);background:#181617;box-shadow:0 13px 31px rgba(0,0,0,.3);animation:authority-card-float 9s ease-in-out -1.2s infinite;transition:border-color .5s ease,box-shadow .5s ease}
 .authority-portrait figcaption h2{color:#f3eee5;font:400 clamp(24px,2.15vw,32px)/1 'Instrument Serif',serif;letter-spacing:-.025em;white-space:nowrap}
 .authority-portrait figcaption span{display:block;margin-top:0;color:var(--gold);font-size:clamp(12px,1.05vw,14px);font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;text-align:center}
 .authority-portrait:hover .authority-photo{box-shadow:0 42px 95px rgba(0,0,0,.46)}
-.authority-portrait:hover .authority-photo img{transform:scale(1.075);filter:saturate(.86) contrast(1.06)}
+.authority-portrait:hover .authority-photo img{transform:scale(1.075);filter:grayscale(1) contrast(1.05)}
 .authority-portrait:hover figcaption{border-color:rgba(201,169,107,.55);box-shadow:0 22px 55px rgba(0,0,0,.42)}
 @keyframes authority-photo-float{0%,100%{transform:rotate(-3deg) translate3d(0,0,0)}50%{transform:rotate(-2.25deg) translate3d(0,-9px,0)}}
 @keyframes authority-card-float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(7px,-5px,0)}}
