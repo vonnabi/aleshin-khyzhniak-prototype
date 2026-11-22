@@ -12,6 +12,8 @@ __pycache__/
 venv/
 .env
 staticfiles/
+# База заявок (персональні дані клієнтів)
+data/
 
 # Build artifact (regenerate from source any time)
 aleshin-partners-site.zip

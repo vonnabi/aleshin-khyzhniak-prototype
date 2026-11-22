@@ -74,6 +74,35 @@ python manage.py runserver
 - `templates/sitemap.xml` — `<loc>`
 - `templates/robots.txt` — `Sitemap:`
 
+## Заявки та CRM (додано 22.11.2026)
+
+Сайт тепер приймає заявки з форм і зберігає їх у SQLite (`data/leads.sqlite3`,
+у git не потрапляє). Облік заявок — адмінка за адресою `/crm/`.
+
+Після заливки файлів і `pip install`, у терміналі cPanel з активованим venv:
+
+```bash
+python manage.py migrate            # створює або оновлює базу заявок
+python manage.py createsuperuser    # перший користувач CRM (логін і пароль задаєш сам)
+python manage.py collectstatic --noinput
+```
+
+Додаткові змінні оточення (усі необовʼязкові, зразок у `.env.example`):
+
+```
+SITE_URL            = https://твій-домен        ← canonical, sitemap, robots; домен міняється лише тут
+SITE_NEW_AT_ROOT    = true                      ← новий сайт на головній адресі, старий на /aleshin-luxe.html
+TELEGRAM_BOT_TOKEN  = <токен від @BotFather>    ← сповіщення про нові заявки
+TELEGRAM_CHAT_ID    = <id чату>
+DJANGO_DB_PATH      = /home/<user>/private/leads.sqlite3
+```
+
+- Доступ за практиками: у CRM користувач без права «Бачить заявки всіх практик»
+  бачить лише заявки практик, указаних у «Доступи до практик», і призначені йому.
+- Резервна копія: достатньо копіювати файл бази.
+- `sitemap.xml` і `robots.txt` тепер генеруються (`config/seo.py`), файли в
+  `templates/` більше не використовуються.
+
 ## Примітки
 
 - Кожне редагування шаблонів/картинок на сервері → знову `collectstatic`

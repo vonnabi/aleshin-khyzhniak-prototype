@@ -6,14 +6,35 @@
   new-site/  → новий корпоративний сайт та його внутрішні сторінки
 """
 
+from django.conf import settings
+from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
+from config.seo import robots_txt, sitemap_xml
+from landings import slugs as landing_slugs
+from leads.views import create_lead
+
+# Що відкривається на головній адресі: старий сайт або новий (після запуску).
+HOME_TEMPLATE = (
+    "new-site/aleshin-corporate.html"
+    if settings.NEW_SITE_AT_ROOT
+    else "old-site/aleshin-luxe.html"
+)
+
 urlpatterns = [
+    # --- Заявки: приймання з форм і облік ---------------------------
+    path("api/lead/", create_lead, name="create_lead"),
+    path("crm/", admin.site.urls),
+    path(
+        "thank-you.html",
+        TemplateView.as_view(template_name="new-site/thank-you.html"),
+        name="thank_you",
+    ),
     # --- Старий сайт (головна) --------------------------------------
     path(
         "",
-        TemplateView.as_view(template_name="old-site/aleshin-luxe.html"),
+        TemplateView.as_view(template_name=HOME_TEMPLATE),
         name="home",
     ),
     path(
@@ -36,6 +57,21 @@ urlpatterns = [
         name="corporate_legacy_filename",
     ),
     path(
+        "brandbook/",
+        TemplateView.as_view(template_name="brandbook/brandbook.html"),
+        name="brandbook",
+    ),
+    path(
+        "brandbook.html",
+        TemplateView.as_view(template_name="brandbook/brandbook.html"),
+    ),
+    # Попередня головна — збережена до погодження нового варіанта
+    path(
+        "home-old.html",
+        TemplateView.as_view(template_name="new-site/home-old.html"),
+        name="home_old",
+    ),
+    path(
         "about.html",
         TemplateView.as_view(template_name="new-site/about.html"),
         name="about",
@@ -56,6 +92,7 @@ urlpatterns = [
         )
         for slug in (
             "kryminalne",
+            "administratyvne",
             "tsyvilne",
             "simejne",
             "korporatyvne",
@@ -72,6 +109,11 @@ urlpatterns = [
         "cases.html",
         TemplateView.as_view(template_name="new-site/cases.html"),
         name="cases",
+    ),
+    path(
+        "case-detail.html",
+        TemplateView.as_view(template_name="new-site/case-detail.html"),
+        name="case_detail",
     ),
     path(
         "media.html",
@@ -116,16 +158,15 @@ urlpatterns = [
         name="privacy",
     ),
     # SEO-файли
-    path(
-        "robots.txt",
-        TemplateView.as_view(
-            template_name="robots.txt", content_type="text/plain"
-        ),
-    ),
-    path(
-        "sitemap.xml",
-        TemplateView.as_view(
-            template_name="sitemap.xml", content_type="application/xml"
-        ),
-    ),
+    # --- Посадкові сторінки послуг (перелік — у landings/) -----------
+    *[
+        path(
+            f"{slug}.html",
+            TemplateView.as_view(template_name=f"new-site/{slug}.html"),
+            name=f"landing_{slug}",
+        )
+        for slug in landing_slugs()
+    ],
+    path("robots.txt", robots_txt),
+    path("sitemap.xml", sitemap_xml),
 ]

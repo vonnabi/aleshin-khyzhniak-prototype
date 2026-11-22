@@ -68,7 +68,7 @@ document.querySelectorAll('.links a').forEach(link=>link.addEventListener('click
   burger?.setAttribute('aria-expanded','false');
 }));
 
-const revealTargets=document.querySelectorAll('.metric,.card,.practice,.person,.case,.article,.split,.head,.contact-row,.form,.cta,.authority-title,.authority-portrait,.authority-copy,.home-heading,.practice-tile,.result-item,.media-intro,.media-row,.recognition-item');
+const revealTargets=document.querySelectorAll('.metric,.card,.practice,.person,.profile,.team-photo,.team-home-card,.v2-step,.v2-video,.lawyer-card,.case,.article,.split,.head,.contact-row,.form,.cta,.authority-title,.authority-portrait,.authority-copy,.home-heading,.practice-tile,.result-item,.media-intro,.media-row,.recognition-item');
 revealTargets.forEach((element,index)=>{
   element.classList.add('reveal-item');
   element.style.transitionDelay=`${Math.min(index%4,3)*70}ms`;
@@ -182,13 +182,51 @@ if(heroCoinVisual&&!reduce&&matchMedia('(hover:hover) and (pointer:fine)').match
   document.addEventListener('mouseleave',()=>{targetX=0;targetY=0;},{passive:true});
 }
 
-const form=document.querySelector('[data-contact-form]');
-form?.addEventListener('submit',event=>{
-  event.preventDefault();
-  const data=new FormData(form);
-  const subject=encodeURIComponent(`Запит на консультацію — ${data.get('name')}`);
-  const body=encodeURIComponent(`Імʼя: ${data.get('name')}\nКонтакт: ${data.get('contact')}\n\nЗавдання:\n${data.get('message')}`);
-  location.href=`mailto:aleshin.partners@ukr.net?subject=${subject}&body=${body}`;
+/* Джерело візиту: UTM-мітки та click id запамʼятовуємо на час сесії */
+const akAttribution=(()=>{
+  const keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'];
+  let saved={};
+  try{saved=JSON.parse(sessionStorage.getItem('ak_attribution')||'{}')}catch(error){saved={}}
+  const params=new URLSearchParams(location.search);
+  const fresh={};
+  keys.forEach(key=>{if(params.get(key))fresh[key]=params.get(key).slice(0,150)});
+  if(!saved.landing||Object.keys(fresh).length){
+    saved=Object.assign({landing:(location.pathname+location.search).slice(0,300),referrer:document.referrer.slice(0,500)},saved.landing&&!Object.keys(fresh).length?saved:{},fresh);
+    try{sessionStorage.setItem('ak_attribution',JSON.stringify(saved))}catch(error){}
+  }
+  return saved;
+})();
+
+/* Форми заявок: надсилаємо на сервер; якщо сервера немає (статичний перегляд) — лист */
+document.querySelectorAll('[data-lead-form]').forEach(form=>{
+  const status=form.querySelector('[data-form-status]');
+  const button=form.querySelector('[type="submit"]');
+  const mailFallback=data=>{
+    const subject=encodeURIComponent(`Запит на консультацію — ${data.name||''}`);
+    const body=encodeURIComponent(`Імʼя: ${data.name||''}\nКонтакт: ${data.contact||''}\n\nЗавдання:\n${data.message||''}`);
+    location.href=`mailto:aleshin.partners@ukr.net?subject=${subject}&body=${body}`;
+  };
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();
+    if(form.dataset.sending)return;
+    const data=Object.assign({},akAttribution,Object.fromEntries(new FormData(form)),{page:(location.pathname+location.search).slice(0,300)});
+    if(form.dataset.practice)data.practice=form.dataset.practice;
+    form.dataset.sending='1';
+    if(button)button.disabled=true;
+    if(status)status.textContent='Надсилаємо…';
+    try{
+      const response=await fetch('/api/lead/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+      if(response.status===404||response.status===405){mailFallback(data);return}
+      const result=await response.json().catch(()=>({}));
+      if(response.ok&&result.ok){location.href=result.redirect||'thank-you.html';return}
+      if(status)status.textContent=result.message||(response.status===429?'Забагато звернень поспіль. Зателефонуйте нам: +38 (099) 400 03 03.':'Не вдалося надіслати. Зателефонуйте нам: +38 (099) 400 03 03.');
+    }catch(error){
+      mailFallback(data);
+    }finally{
+      delete form.dataset.sending;
+      if(button)button.disabled=false;
+    }
+  });
 });
 
 /* FAQ accordion (service pages) */
@@ -251,3 +289,26 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches){
     addEventListener('scroll',()=>panel.classList.remove('open'),{passive:true});
   }
 }
+
+/* Перегляд зображення на весь екран (документи у кейсах) */
+document.addEventListener('click',event=>{
+  const link=event.target.closest('[data-lightbox]');
+  if(!link)return;
+  event.preventDefault();
+  const box=document.createElement('div');
+  box.className='lightbox';
+  box.setAttribute('role','dialog');
+  box.setAttribute('aria-label',link.getAttribute('aria-label')||'Документ');
+  const img=document.createElement('img');
+  img.src=link.href;img.alt=link.getAttribute('aria-label')||'';
+  const close=document.createElement('button');
+  close.className='lightbox-close';close.type='button';close.setAttribute('aria-label','Закрити');close.textContent='×';
+  box.append(img,close);
+  const shut=()=>{box.remove();document.removeEventListener('keydown',onKey);document.documentElement.style.overflow=''};
+  const onKey=e=>{if(e.key==='Escape')shut()};
+  box.addEventListener('click',shut);
+  document.addEventListener('keydown',onKey);
+  document.documentElement.style.overflow='hidden';
+  document.body.appendChild(box);
+  requestAnimationFrame(()=>box.classList.add('is-open'));
+});
