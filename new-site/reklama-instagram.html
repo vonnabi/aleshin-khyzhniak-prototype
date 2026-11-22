@@ -17,24 +17,25 @@
   --ig-ink:#0c1014;--ig-muted:#737373;--ig-line:#dbdbdb;--ig-blue:#0095f6;--ig-bubble:#efefef;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img{max-width:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans);overflow-x:hidden}
 a{color:var(--gold-light)}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 header.top{border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
-header.top img{height:44px;width:auto;display:block}
-.tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);padding:6px 10px;border-radius:999px;white-space:nowrap}
+header.top img{height:auto;max-height:44px;width:auto;max-width:60%;display:block;flex:0 1 auto;min-width:0}
+.tag{flex:0 1 auto;min-width:0;text-align:center;line-height:1.2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
 .hero{padding:48px 0 24px}
 .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 h1{font:400 clamp(36px,6vw,64px)/1.02 var(--serif);margin:12px 0 16px;letter-spacing:-.01em}
 h1 em{color:var(--gold-light)}
 .lead{max-width:44em;color:#d9d2c7;font-size:17px;margin:0}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:28px 0 8px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:12px;margin:28px 0 8px}
 .fact{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:rgba(255,251,244,.035)}
 .fact b{display:block;font:400 30px/1.1 var(--serif);color:var(--gold-light)}
 .fact span{color:var(--muted);font-size:13px}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:26px 0 8px;padding:0;list-style:none;counter-reset:s}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:12px;margin:26px 0 8px;padding:0;list-style:none;counter-reset:s}
 .steps li{counter-increment:s;border-top:1px solid var(--line);padding:14px 0 0}
 .steps li::before{content:"0" counter(s);display:block;font:400 26px/1 var(--serif);color:var(--gold);margin-bottom:6px}
 .steps b{display:block;color:var(--ink)}
@@ -45,9 +46,10 @@ section.topic{padding:44px 0 12px;border-top:1px solid var(--line);margin-top:36
 .topic-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px}
 h2{font:400 clamp(30px,4.4vw,44px)/1.05 var(--serif);margin:0}
 .who{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 26px}
-.who span{font-size:13px;color:#ddd5c9;border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.who span{max-width:100%;font-size:13px;color:#ddd5c9;border:1px solid var(--line);border-radius:999px;padding:5px 12px}
 .who span.money{border-color:rgba(201,169,107,.5);color:var(--gold-light)}
-.topic-body{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+.topic-body{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px;align-items:start}
+.topic-body>*{min-width:0}
 .label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
 .ads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .ad{min-width:0}
@@ -66,7 +68,7 @@ details.caption[open] summary::after{content:" ↑"}
 details.caption p{white-space:pre-line;margin:10px 0 2px;color:#ddd5c9}
 
 /* ---------- макет телефона ---------- */
-.phone{position:relative;width:100%;max-width:280px;aspect-ratio:9/18.5;border-radius:34px;background:#0b0b0c;padding:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.45);margin:0 auto}
+.phone{position:relative;width:100%;max-width:280px;aspect-ratio:9/17;border-radius:34px;background:#0b0b0c;padding:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.45);margin:0 auto}
 .screen{position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;background:#000}
 .notch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:34%;height:20px;border-radius:12px;background:#0b0b0c;z-index:5}
 .reel img.media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -119,15 +121,15 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 .ask p{margin:6px 0;color:#ddd5c9}
 
 @media (max-width:980px){
-  .topic-body{grid-template-columns:1fr}
+  .topic-body{grid-template-columns:minmax(0,1fr)}
   .chat-col{order:2}
   .ads{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;gap:16px;padding:0 16px 10px;margin:0 -16px}
-  .ad{flex:0 0 78%;max-width:300px;scroll-snap-align:start}
-  .swipe{display:block}
+  .ad{flex:0 0 min(78%,300px);scroll-snap-align:start}
+  .topic .swipe{display:block}
 }
 .swipe{display:none;color:var(--muted);font-size:12px;margin:-14px 0 12px}
 @media (min-width:981px){.chat-col{position:sticky;top:16px}}
-@media (max-width:560px){header.top img{height:34px}.tag{font-size:10px;letter-spacing:.1em;padding:5px 9px}.hero{padding-top:32px}.lead{font-size:16px}}
+@media (max-width:560px){header.top img{max-height:34px}.tag{font-size:10px;letter-spacing:.1em;padding:5px 9px}.hero{padding-top:32px}.lead{font-size:16px}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 </style>
 </head>
@@ -183,7 +185,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
         <div class="ads">
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-DfhujEysJUo.jpg" alt="Обкладинка відео від 09.11 про виплату одноразової грошової допомоги" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-DfhujEysJUo.jpg" alt="Обкладинка відео від 09.11 про виплату одноразової грошової допомоги" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/DfhujEysJUo" aria-label="Дивитися відео від 09.11"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -204,7 +206,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-DfUb99nuYwQ.jpg" alt="Обкладинка відео від 04.11 про право позашлюбних дітей на виплату" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-DfUb99nuYwQ.jpg" alt="Обкладинка відео від 04.11 про право позашлюбних дітей на виплату" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/DfUb99nuYwQ" aria-label="Дивитися відео від 04.11"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -225,7 +227,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-Dcs6hwaO-8y.jpg" alt="Обкладинка відео-кейсу від 31.08: виплата 15 млн грн родині загиблого військового" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-Dcs6hwaO-8y.jpg" alt="Обкладинка відео-кейсу від 31.08: виплата 15 млн грн родині загиблого військового" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/Dcs6hwaO-8y" aria-label="Дивитися відео від 31.08"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -272,7 +274,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
         <div class="ads">
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-Df1t9YfxRo8.jpg" alt="Обкладинка відео від 17.11 про судову справу в Україні, коли людина за кордоном" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-Df1t9YfxRo8.jpg" alt="Обкладинка відео від 17.11 про судову справу в Україні, коли людина за кордоном" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/Df1t9YfxRo8" aria-label="Дивитися відео від 17.11"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -293,7 +295,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-DfmUqOdR-0q.jpg" alt="Обкладинка відео від 11.11 про помилку в документах" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-DfmUqOdR-0q.jpg" alt="Обкладинка відео від 11.11 про помилку в документах" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/DfmUqOdR-0q" aria-label="Дивитися відео від 11.11"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -314,7 +316,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-DeRVMmuudNm.jpg" alt="Обкладинка відео від 09.10 для українців за кордоном" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-DeRVMmuudNm.jpg" alt="Обкладинка відео від 09.10 для українців за кордоном" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/DeRVMmuudNm" aria-label="Дивитися відео від 09.10"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -362,7 +364,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
         <div class="ads">
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-DcvnXuRMt2t.jpg" alt="Обкладинка відео від 01.09 про відстрочку для здобувачів вищої освіти" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-DcvnXuRMt2t.jpg" alt="Обкладинка відео від 01.09 про відстрочку для здобувачів вищої освіти" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/DcvnXuRMt2t" aria-label="Дивитися відео від 01.09"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -382,7 +384,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 
           <article class="ad">
             <div class="phone reel"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/reel-DcbjZzVMMpx.jpg" alt="Обкладинка відео від 24.08 про розшук ТЦК і вступ до університету" loading="lazy">
+              <img class="media" src="../assets/instagram/reel-DcbjZzVMMpx.jpg" alt="Обкладинка відео від 24.08 про розшук ТЦК і вступ до університету" decoding="async">
               <div class="shade"></div>
               <button class="play" type="button" data-embed="reel/DcbjZzVMMpx" aria-label="Дивитися відео від 24.08"></button>
               <div class="side"><i></i><i></i><i></i></div>
@@ -403,7 +405,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 
           <article class="ad">
             <div class="phone reel square"><div class="screen"><div class="notch"></div>
-              <img class="media" src="../assets/instagram/post-Dc22CMyjrW2.jpg" alt="Перша картка кейсу від 04.09: виключення клієнта з військового обліку" loading="lazy">
+              <img class="media" src="../assets/instagram/post-Dc22CMyjrW2.jpg" alt="Перша картка кейсу від 04.09: виключення клієнта з військового обліку" decoding="async">
               <div class="shade"></div>
               <span class="slides">1 / 5</span>
               <div class="side"><i></i><i></i><i></i></div>
@@ -437,7 +439,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0 40px;colo
 <footer><div class="wrap">Адвокатське обʼєднання «Альошин, Хижняк та Партнери» · чернетка реклами для погодження, сторінка не індексується пошуковими системами.</div></footer>
 
 <dialog id="video" aria-label="Відео з Instagram">
-  <div class="vbox"><iframe title="Відео з Instagram" src="about:blank" allow="autoplay; encrypted-media; picture-in-picture" loading="lazy"></iframe></div>
+  <div class="vbox"><iframe title="Відео з Instagram" src="about:blank" allow="autoplay; encrypted-media; picture-in-picture" decoding="async"></iframe></div>
   <button class="vclose" type="button">Закрити</button>
 </dialog>
 
